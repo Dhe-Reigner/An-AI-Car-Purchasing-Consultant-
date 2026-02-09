@@ -4,8 +4,8 @@ import plotly_express as px
 
 st.set_page_config(layout='wide')
 
-st.title('Car Buyers Market Behaviour')
-df=pd.read_csv('pages/3.CarBuyers.csv')
+st.title='Car Buyers Market Behaviour'
+df=pd.read_csv('dataset/CarBuyers.csv')
 
 st.subheader('Dataset Preview')
 st.dataframe(df,use_container_width=True)
@@ -23,31 +23,31 @@ with col1:
 
 with col2:
     st.subheader('Female Car Preferences',divider='rainbow')
-    fig = px.bar(
+    fig1 = px.bar(
         df,
         x='Model',
         y='Female',
     )
-    st.plotly_chart(fig,  use_container_width=True)
+    st.plotly_chart(fig1,  use_container_width=True)
 
 col11, col22 = st.columns(2)
 
 with col11:
     st.subheader('Buyer Intent', divider='rainbow')
-    fig = px.scatter(
+    fig2 = px.scatter(
         df,
         x='Model',
         y='Price',
         color='Male'
     )
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig2,use_container_width=True)
 
 with col22:
     st.subheader('Buyer Intent', divider='rainbow')
-    fig = px.scatter(
+    fig3 = px.scatter(
         df,
         x='Model',
         y='Price',
         color='Female'
     )
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig3,use_container_width=True)

@@ -289,7 +289,7 @@ st.set_page_config(
 
 st.title="Customer Car Purchasing Behavior Analysis"
 
-df = pd.read_csv('pages/1.CarPurchase.csv')
+df = pd.read_csv('dataset/CarPurchase.csv')
 
 st.subheader('Data Review')
 st.dataframe(df,use_container_width=True)

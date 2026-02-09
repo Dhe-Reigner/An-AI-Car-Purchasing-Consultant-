@@ -5,9 +5,9 @@ import plotly.express as px
 st.set_page_config(
     layout='wide'
 )
-st.title('UAE Used Cars Market Analysis')
+st.title='UAE Used Cars Market Analysis'
 
-df = pd.read_csv('pages/2.UsedCars.csv')
+df = pd.read_csv('dataset/UsedCars.csv')
 
 st.subheader('Dataset Preview')
 st.dataframe(df,use_container_width=True)

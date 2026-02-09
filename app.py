@@ -22,3 +22,5 @@ This application helps buyers make **financially optimal, explainable and risk-a
 👉 Use the navigation bar to navigate through the analysis and recommendation pages.
 """
 )
+
+st.sidebar.success('Select a page')
