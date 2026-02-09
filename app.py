@@ -24,4 +24,4 @@ This application helps buyers make **financially optimal, explainable and risk-a
 """
 )
 
-st.sidebar.success('Select a page')
+
