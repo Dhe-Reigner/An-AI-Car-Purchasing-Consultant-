@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 st.set_page_config(layout='wide')
 
@@ -8,7 +9,10 @@ st.title='Vehicle Insurance Cost Analysis'
 
 df = pd.read_csv('dataset/VehicleInsurance.csv')
 st.subheader('Handling Vehicle Insurance')
-st.dataframe(df, use_container_width=True)
+#st.dataframe(df, use_container_width=True)
+
+filtered_df = dataframe_explorer(df,case=True)
+st.dataframe(filtered_df, use_container_width=True)
 
 col1, col2 = st.columns(2)
 

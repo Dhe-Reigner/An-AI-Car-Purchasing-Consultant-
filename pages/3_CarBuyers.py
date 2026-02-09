@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly_express as px
+from streamlit_extras.dataframe_explorer import dataframe_explorer
 
 st.set_page_config(layout='wide')
 
@@ -8,7 +9,10 @@ st.title='Car Buyers Market Behaviour'
 df=pd.read_csv('dataset/CarBuyers.csv')
 
 st.subheader('List of Car Buyers with their Car Preferences')
-st.dataframe(df,use_container_width=True)
+#st.dataframe(df,use_container_width=True)
+
+filtered_df = dataframe_explorer(df,case=True)
+st.dataframe(filtered_df,use_container_width=True)
 
 col1, col2 = st.columns(2)
 
