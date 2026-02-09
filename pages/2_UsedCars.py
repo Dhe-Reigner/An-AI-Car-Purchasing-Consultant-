@@ -9,7 +9,7 @@ st.title='UAE Used Cars Market Analysis'
 
 df = pd.read_csv('dataset/UsedCars.csv')
 
-st.subheader('Dataset Preview')
+st.subheader('Detailed Analysis of Used Cars')
 st.dataframe(df,use_container_width=True)
 
 col1, col2 = st.columns(2)

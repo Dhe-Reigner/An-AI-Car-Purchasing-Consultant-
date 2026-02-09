@@ -8,7 +8,7 @@ st.set_page_config(
 
 df = pd.read_csv('dataset/VehicleRepairs.csv')
 
-st.subheader('Dataset Preview')
+st.subheader('Vehicle Diagnosis & Repairs')
 st.dataframe(df,use_container_width=True)
 
 col1, col2 = st.columns(2)

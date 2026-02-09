@@ -6,7 +6,8 @@ st.set_page_config(
     layout='wide'
     )
 
-st.title('🚗 AI Car Purchasing Consultant')
+
+st.title='🚗 AI Car Purchasing Consultant'
 
 st.markdown(
     """

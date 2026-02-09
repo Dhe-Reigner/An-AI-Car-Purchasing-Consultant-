@@ -7,7 +7,7 @@ st.set_page_config(layout='wide')
 st.title='Car Buyers Market Behaviour'
 df=pd.read_csv('dataset/CarBuyers.csv')
 
-st.subheader('Dataset Preview')
+st.subheader('List of Car Buyers with their Car Preferences')
 st.dataframe(df,use_container_width=True)
 
 col1, col2 = st.columns(2)

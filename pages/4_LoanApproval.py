@@ -9,7 +9,7 @@ st.title='Loan Approval Analysis'
 
 df = pd.read_csv('dataset/LoanApproval.csv')
 
-st.subheader('Dataset Preview')
+st.subheader('A glimpse of Bank/s Loan Approval')
 st.dataframe(df,use_container_width=True)
 
 col1,col2 = st.columns(2)

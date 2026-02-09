@@ -291,7 +291,7 @@ st.title="Customer Car Purchasing Behavior Analysis"
 
 df = pd.read_csv('dataset/CarPurchase.csv')
 
-st.subheader('Data Review')
+st.subheader('Car Purchase Analysis')
 st.dataframe(df,use_container_width=True)
 
 col1, col2 = st.columns(2)

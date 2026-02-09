@@ -7,7 +7,7 @@ st.set_page_config(layout='wide')
 st.title='Vehicle Insurance Cost Analysis'
 
 df = pd.read_csv('dataset/VehicleInsurance.csv')
-st.subheader('Dataset Preview')
+st.subheader('Handling Vehicle Insurance')
 st.dataframe(df, use_container_width=True)
 
 col1, col2 = st.columns(2)
