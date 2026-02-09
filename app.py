@@ -8,7 +8,7 @@ from streamlit_option_menu import option_menu
 #with st.sidebar:
 selected = option_menu(
     menu_title=None,
-    options=['Car Purchase','UAE Used Cars','Car Buyers','Loan Approval','Car Purchase Reccomendation'],
+    options=['Car Purchase','UAE Used Cars','Car Buyers','Loan Approval','Vehicle Insurance','Car Diagnosis & Repairs','Car Purchase Reccomendation'],
     orientation='horizontal'
 )
 
@@ -20,6 +20,10 @@ if selected == 'Car Buyers':
     st.title(f'List of {selected} with their Car Preferences')
 if selected == 'Loan Approval':
     st.title(f'A glimpse of Bank/s {selected}')
+if selected == 'Vehicle Insurance':
+    st.title(f"Handling {selected}")
+if selected == 'Car Diagnosis & Repairs':
+    st.title(f"For {selected}")
 if selected == 'Car Purchase Reccomendation':
     st.title(f'Based on the Relevant, we suggest this {selected}')
 
