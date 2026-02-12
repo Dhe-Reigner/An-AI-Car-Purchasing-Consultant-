@@ -285,58 +285,29 @@ import plotly.express as px
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 from langchain_experimental.agents import create_csv_agent
 from langchain_groq import ChatGroq
-from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 import os
 
 
-
-st.set_page_config(
-    layout='wide'
-)
-
+#----------------Page Config----------
+st.set_page_config(layout='wide')
 st.title="Customer Car Purchasing Behavior Analysis"
 
+#-------------Load Data---------------
 df = pd.read_csv('dataset/CarPurchase.csv')
 
-#langchain setup
-load_dotenv()
-api_key = os.getenv('GROQ_API_KEY')
-user_csv = df
-
-
-
-if user_csv is not None:
-    user_question = st.chat_input('Ask a question about the csv')
-
-    llm = ChatGroq(model='llama-3.1-8b-instant',temperature=0.6,api_key=api_key)
-
-    prompt = '{Query}'
-
-    prompt_template = ChatPromptTemplate.from_template(prompt)
-
-    chain = prompt_template | llm
-
-    chatcsv = create_csv_agent(chain,user_csv,allow_dangerous_code=True,verbose=True)
-
-    if user_question is not None and user_question !="":
-        #  response = chain.invoke({'Query':user_question})
-         response = chatcsv.run(user_question)
-         st.write("Your question was:",{response})
-
-
+#------------Analytics Section---------
 st.subheader('Car Purchase Analysis')
 
-#st.dataframe(df,use_container_width=True)
 filtered_df = dataframe_explorer(df, case=True)
-st.dataframe(filtered_df)
+st.dataframe(filtered_df,use_container_width=True)
 
 col1, col2 = st.columns(2)
 
 with col1:
     st.subheader('Annual Salary VS Car Purchase Amount', divider='rainbow')
     fig = px.scatter(
-        df,
+        filtered_df,
         x='Annual Salary',
         y='Car Purchase Amount',
         color='Gender'
@@ -346,8 +317,46 @@ with col1:
 with col2:
     st.subheader('Age Distribution of Buyers', divider='rainbow')
     fig2 = px.histogram(
-        df,
+        filtered_df,
         x='Age',
         nbins=20,
     )
     st.plotly_chart(fig2, use_container_width=True)
+
+
+#------------AI Interation Section----------
+st.divider()
+st.subheader('🤖Ask the Data(AI-Powered Insights)')
+
+st.markdown(
+    """
+You can ask questions like:
+- *Which income group spends the most on cars?*
+- *Do males or females spend more on averages?*
+- *What age range makes the highest purchases?*
+- *Is salary strongly correlated with car price?*
+"""
+)
+
+#---------------LangChain Setup------------
+load_dotenv()
+api_key = os.getenv('GROQ_API_KEY')
+llm = ChatGroq(model='llama-3.1-8b-instant',temperature=0.6,api_key=api_key)
+
+user_csv = 'dataset/CarPurchase.csv'
+
+chatcsv = create_csv_agent(llm,user_csv,allow_dangerous_code=True,verbose=True)
+
+
+#---------------Chat Input------------
+user_question = st.chat_input('Ask a question about the car purchase data')
+
+
+if user_question:
+        with st.spinner('Analyzing the data...'):
+            response = chatcsv.run(user_question)
+
+        st.markdown('### 📊 AI Insight')
+        st.write(response)
+
+
