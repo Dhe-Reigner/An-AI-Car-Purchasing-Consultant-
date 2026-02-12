@@ -283,6 +283,13 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from streamlit_extras.dataframe_explorer import dataframe_explorer
+from langchain_experimental.agents import create_csv_agent
+from langchain_groq import ChatGroq
+from langchain_core.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+import os
+
+
 
 st.set_page_config(
     layout='wide'
@@ -291,6 +298,32 @@ st.set_page_config(
 st.title="Customer Car Purchasing Behavior Analysis"
 
 df = pd.read_csv('dataset/CarPurchase.csv')
+
+#langchain setup
+load_dotenv()
+api_key = os.getenv('GROQ_API_KEY')
+user_csv = df
+
+
+
+if user_csv is not None:
+    user_question = st.chat_input('Ask a question about the csv')
+
+    llm = ChatGroq(model='llama-3.1-8b-instant',temperature=0.6,api_key=api_key)
+
+    prompt = '{Query}'
+
+    prompt_template = ChatPromptTemplate.from_template(prompt)
+
+    chain = prompt_template | llm
+
+    chatcsv = create_csv_agent(chain,user_csv,allow_dangerous_code=True,verbose=True)
+
+    if user_question is not None and user_question !="":
+        #  response = chain.invoke({'Query':user_question})
+         response = chatcsv.run(user_question)
+         st.write("Your question was:",{response})
+
 
 st.subheader('Car Purchase Analysis')
 
