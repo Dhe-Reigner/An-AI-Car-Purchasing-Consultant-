@@ -282,6 +282,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import matplotlib.pyplot as plt
+import seaborn as sns
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 from langchain_experimental.agents import create_csv_agent
 from langchain_groq import ChatGroq
@@ -333,30 +335,130 @@ st.divider()
 #----------Demographics----------
 st.subheader('👥 Demographic Analysis')
 
+demo1,demo2,demo3 = st.columns(3)
+
+with demo1:
+     st.subheader('Buyers by Country',divider='rainbow')
+     fig = px.bar(df['Country'].value_counts().reset_index(name='Count'),
+                  x='Country', y='Count',
+                  )
+     st.plotly_chart(fig,use_container_width=True)
+     
+with demo2:
+     st.subheader('Gender Distribution',divider='rainbow')
+     fig2 = px.pie(filtered_df,names='Gender')
+     st.plotly_chart(fig2,use_container_width=True)
+
+with demo3:
+     st.subheader('Age Distribution',divider='rainbow')
+     fig3 = px.histogram(filtered_df,x='Age',nbins=20)
+     st.plotly_chart(fig3,use_container_width=True)
+
+st.divider()
+
+#------------Income & Purchase---------
+st.subheader('💰 Income vs Car Purchase Behavior')
+
+car1, car2 = st.columns(2)
+
+with car1:
+     st.subheader('Annual Salary vs Car Purchase Amount')
+     car1 = px.scatter(
+          filtered_df,
+          x='Annual Salary',
+          y='Car Purchase Amount',
+          color='Gender',  
+     )
+     st.plotly_chart(car1,use_container_width=True)
+
+with car2:
+     st.subheader('Annual Salary by Gender')
+     car2 = px.box(
+          filtered_df,
+          x='Gender',
+          y='Annual Salary',
+     )
+     st.plotly_chart(car2,use_container_width=True)
 
 
+# Line Chart
+st.subheader('Average Car Purchase Amount by Age',divider='rainbow')
+avg_by_age = df.groupby('Age')['Car Purchase Amount'].mean().reset_index()
+avg = px.line(
+     avg_by_age,
+     x='Age',
+     y='Car Purchase Amount'
+)
+st.plotly_chart(avg,use_container_width=True)
 
+st.divider()
 
-col1, col2 = st.columns(2)
+#-----------Debt & Wealth---------
+st.subheader('📉Debt & Net Worth Analysis')
 
-with col1:
-    st.subheader('Annual Salary VS Car Purchase Amount', divider='rainbow')
-    fig = px.scatter(
-        filtered_df,
-        x='Annual Salary',
-        y='Car Purchase Amount',
-        color='Gender'
-    )
-    st.plotly_chart(fig,use_container_width=True)
+debt1, debt2 = st.columns(2)
 
-with col2:
-    st.subheader('Age Distribution of Buyers', divider='rainbow')
-    fig2 = px.histogram(
-        filtered_df,
-        x='Age',
-        nbins=20,
-    )
-    st.plotly_chart(fig2, use_container_width=True)
+with debt1:
+     st.subheader('Credit Card Debt Distribution')
+     debt1 = px.histogram(
+          filtered_df,
+          x='Credit Card Debt',
+          nbins=30
+     )
+     st.plotly_chart(debt1,use_container_width=True)
+
+with debt2:
+     st.subheader('Credit Card Debt vs Car Purchase')
+     debt2 = px.scatter(
+          filtered_df,
+          x='Credit Card Debt',
+          y='Car Purchase Amount'
+     )
+     st.plotly_chart(debt2,use_container_width=True)
+
+st.subheader('Net Worth Distribution by Country',divider='rainbow')
+box = px.box(
+     filtered_df,
+     x='Country',
+     y='Net Worth'
+)
+st.plotly_chart(box,use_container_width=True)
+
+st.divider()
+
+#-------------Correlation Heatmap----------
+st.subheader('🧠 Correlation  Heatmap')
+
+numeric_df = df[
+     ['Age','Annual Salary','Credit Card Debt','Net Worth','Car Purchase Amount']
+]
+
+corr = numeric_df.corr()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+sns.heatmap(corr, annot=True, cmap='coolwarm',ax=ax)
+st.pyplot(fig)
+
+# col1, col2 = st.columns(2)
+
+# with col1:
+#     st.subheader('Annual Salary VS Car Purchase Amount', divider='rainbow')
+#     fig = px.scatter(
+#         filtered_df,
+#         x='Annual Salary',
+#         y='Car Purchase Amount',
+#         color='Gender'
+#     )
+#     st.plotly_chart(fig,use_container_width=True)
+
+# with col2:
+#     st.subheader('Age Distribution of Buyers', divider='rainbow')
+#     fig2 = px.histogram(
+#         filtered_df,
+#         x='Age',
+#         nbins=20,
+#     )
+#     st.plotly_chart(fig2, use_container_width=True)
 
 
 #------------AI Interation Section----------
