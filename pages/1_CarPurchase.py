@@ -288,6 +288,14 @@ from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
 
+def clean_currency(col):
+     return(
+          col.astype(str)
+          .str.replace('$','',regex=False)
+          .str.replace(',','',regex=False)
+          .astype(float)
+     )
+
 
 #----------------Page Config----------
 st.set_page_config(layout='wide')
@@ -301,6 +309,33 @@ st.subheader('Car Purchase Analysis')
 
 filtered_df = dataframe_explorer(df, case=True)
 st.dataframe(filtered_df,use_container_width=True)
+
+money_cols = [
+     'Annual Salary',
+     'Credit Card Debt',
+     'Net Worth',
+     'Car Purchase Amount'
+]
+for col in money_cols:
+     df[col] = clean_currency(df[col])
+
+#-------------KPIs-------------
+st.subheader('📊Key Metrics')
+a1,a2,a3,a4 = st.columns(4)
+
+a1.metric('Total Buyers',len(filtered_df))
+a2.metric('Average Car Purchase($)',f"{df['Car Purchase Amount'].mean():,.0f}")
+a3.metric('Average Annual Salary ($)',f'{df['Annual Salary'].mean():,.0f}')
+a4.metric('Average Net Worth ($)',f"{df['Net Worth'].mean():,.0f}")
+
+st.divider()
+
+#----------Demographics----------
+st.subheader('👥 Demographic Analysis')
+
+
+
+
 
 col1, col2 = st.columns(2)
 
