@@ -30,7 +30,14 @@ df['Cylinders'] = pd.to_numeric(df['Cylinders'],errors='coerce')
 
 df.dropna(subset=['Price','Mileage','Year'], inplace=True)
 
+#-------------Overview KPIs--------
+col1,col2,col3,col4,col5 = st.columns(5)
 
+col1.metric('Total Listings',len(filtered_df))
+col2.metric('Average Price (AED)',f"{df['Price'].mean():,.0f}")
+col3.metric('Median Price (AED)',f"{df['Price'].median():,.0f}")
+col4.metric('Average Mileage (km)',f"{df['Mileage'].mean():,.0f}")
+col5.metric('Top Make',df['Make'].mode()[0])
 
 
 
