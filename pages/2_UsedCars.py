@@ -39,35 +39,133 @@ col3.metric('Median Price (AED)',f"{df['Price'].median():,.0f}")
 col4.metric('Average Mileage (km)',f"{df['Mileage'].mean():,.0f}")
 col5.metric('Top Make',df['Make'].mode()[0])
 
+#-----------Brand & Body Type Analysis--------
+st.subheader('🏷️ Brand & Body Type Analysis')
 
+brand1,brand2 = st.columns(2)
 
-col1, col2 = st.columns(2)
+with brand1:
+    st.subheader('Top 10 Car Makes',divider='rainbow')
+    brand1 = px.bar(
+        df['Make'].value_counts().head(10)
+    )
+    st.plotly_chart(brand1,use_container_width=True)
 
-with col1:
-    st.subheader('Mileage VS Price', divider='rainbow')
-    fig = px.scatter(
+with brand2:
+    st.subheader('Body Type Distribution',divider='rainbow')
+    brand2 = px.pie(
         filtered_df,
-        x='Mileage',
-        y='Price',
-        color='Make',
-        hover_data=['Model','Year']
+        names='Body Type'
     )
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(brand2,use_container_width=True)
 
-with col2:
-    st.subheader('Most Common Car Brands')
-    brand_counts = (
-        filtered_df['Make'].
-        value_counts().
-        reset_index().
-        rename(columns={'index':'Make','Make':'Count'})
+
+#--------------Price & Mileage Analysis---------
+st.subheader('💰 Price & Mileage Insights')
+
+price1,price2 = st.columns(2)
+
+with price1:
+    st.subheader('Price Distribution', divider='rainbow')
+    price1 = px.histogram(
+        filtered_df,
+        x='Price',
+        nbins=50
     )
-    fig2 = px.bar(
-        brand_counts,
-        x='Make',
-        y='Count'
+    st.plotly_chart(price1, use_container_width=True)
+
+with price2:
+    st.subheader('Price by Body Type',divider='rainbow')
+    price2 = px.box(
+        filtered_df,
+        x='Body Type',
+        y='Price'
     )
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(price2,use_container_width=True)
+
+st.subheader('Price vs Mileage',divider='rainbow')
+scatter = px.scatter(
+    filtered_df,
+    x='Mileage',
+    y='Price',
+    color='Body Type'
+)
+st.plotly_chart(scatter,use_container_width=True)
+
+#----------Year-Based Trends-------------
+st.subheader('📅 Time-Based Trends')
+
+year_stats = df.groupby('Year').agg(
+    Avg_Price=('Price','mean'),
+    Listings=('Price','count')
+).reset_index()
+
+stats1,stats2 = st.columns(2)
+
+with stats1:
+    st.subheader('Average Price by Year',divider='rainbow')
+    stats1 = px.line(
+        year_stats,
+        x='Year',
+        y='Avg_Price'
+    )
+    st.plotly_chart(stats1,use_container_width=True)
+
+with stats2:
+    st.subheader('Listings Count by Year',divider='rainbow')
+    stats2 = px.line(
+        year_stats,
+        x='Year',
+        y='Listings'
+    )
+    st.plotly_chart(stats2,use_container_width=True)
+
+#----------Techinical Features----------
+st.subheader('⚙️ Techincal Characteristics',divider='rainbow')
+
+tech1,tech2,tech3 = st.columns(3)
+
+with tech1:
+    st.subheader('Transmission Type',divider='rainbow')
+    tech1 = px.pie(
+        filtered_df
+    )
+
+
+
+
+
+
+
+
+
+# col1, col2 = st.columns(2)
+
+# with col1:
+#     st.subheader('Mileage VS Price', divider='rainbow')
+#     fig = px.scatter(
+#         filtered_df,
+#         x='Mileage',
+#         y='Price',
+#         color='Make',
+#         hover_data=['Model','Year']
+#     )
+#     st.plotly_chart(fig,use_container_width=True)
+
+# with col2:
+#     st.subheader('Most Common Car Brands')
+#     brand_counts = (
+#         filtered_df['Make'].
+#         value_counts().
+#         reset_index().
+#         rename(columns={'index':'Make','Make':'Count'})
+#     )
+#     fig2 = px.bar(
+#         brand_counts,
+#         x='Make',
+#         y='Count'
+#     )
+#     st.plotly_chart(fig2, use_container_width=True)
 
 #-----------AI Interaction Section-----------
 st.divider()
