@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import matplotlib.pyplot as plt
+import seaborn as sns
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 from langchain_experimental.agents import create_csv_agent
 from langchain_groq import ChatGroq
@@ -19,6 +21,18 @@ st.subheader('Detailed Analysis of Used Cars')
 
 filtered_df = dataframe_explorer(df, case=True)
 st.dataframe(filtered_df,use_container_width=True)
+
+#----------Load & Cleaning Data---------
+df['Price'] = pd.to_numeric(df['Price'],errors='coerce')
+df['Mileage'] = pd.to_numeric(df['Mileage'],errors='coerce')
+df['Year'] = pd.to_numeric(df['Year'],errors='coerce')
+df['Cylinders'] = pd.to_numeric(df['Cylinders'],errors='coerce')
+
+df.dropna(subset=['Price','Mileage','Year'], inplace=True)
+
+
+
+
 
 col1, col2 = st.columns(2)
 

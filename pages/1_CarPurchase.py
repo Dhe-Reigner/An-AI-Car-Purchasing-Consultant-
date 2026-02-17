@@ -488,6 +488,36 @@ chatcsv = create_csv_agent(llm,user_csv,allow_dangerous_code=True,verbose=True)
 #---------------Chat Input------------
 user_question = st.chat_input('Ask a question about the car purchase data')
 
+# ANALYSIS_PROMPT = """
+# You are a senior data analyst and business intelligence consultant.
+
+# When answering:
+# - Always explain *what the data shows*
+# - Indentify *patterns and trends*
+# - Mention *numerical evidence* (averages, percentages,ranges)
+# - Highlight *busness implications*
+# - Suggest *actions or decisions* where relevant
+
+# DO NOT just return numbers.
+# Always provide insight and interpretation.
+
+# Consider using the structure below to structure the answer:
+
+# 📌 Key Finding:
+# - ...
+
+# 📈 Data Evidence:
+# - ...
+
+# 💡 Business Insight:
+# - ...
+
+# 🎯 Recommendation:
+# - ...
+
+# User question:
+# {question}
+# """
 
 if user_question:
         with st.spinner('Analyzing the data...'):
