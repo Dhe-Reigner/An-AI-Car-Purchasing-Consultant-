@@ -23,6 +23,34 @@ st.subheader('Overview of Bank Loan Approval Decisions')
 filtered_df = dataframe_explorer(df, case=True)
 st.dataframe(filtered_df,use_container_width=True)
 
+
+numeric_cols = [
+    'loan_id', ' no_of_dependents', ' education', ' self_employed',
+       ' income_annum', ' loan_amount', ' loan_term', ' cibil_score',
+       ' residential_assets_value', ' commercial_assets_value',
+       ' luxury_assets_value', ' bank_asset_value', ' loan_status'
+]
+for col in numeric_cols:
+    filtered_df[col] = (
+        filtered_df[col]
+        .astype(str)
+        .str.replace(',','',regex=True)
+        .str.replace(r'[^\d.]','',regex=True)
+        .astype(float)
+    )
+
+col1,col2,col3,col4,col5 = st.columns(5)
+
+approval_rate = (df[' loan_status'] == ' Approved').mean() * 100
+
+col1.metric('Total Applicants',len(filtered_df))
+col2.metric('Approval Rate (%)',round(approval_rate,2))
+col3.metric('Average Income'f'${df[' income_annum'].mean():,.0f}')
+col4.metric('Average Loan Amount',f"${df[' loan_amount'].mean():,.0f}")
+col5.metric('Average CIBIL Score',round(df[' cibil_score'].mean(),1))
+
+
+
 col1,col2 = st.columns(2)
  
 with col1:
@@ -40,7 +68,7 @@ with col2:
     st.subheader('Applicant Income Distribution by Loan Status', divider='rainbow')
     fig2 = px.histogram(
         filtered_df,
-        x=' income_annum',
+        x='income_annum',
         color='loan_status',
         barmode='overlay',
         nbins=30,
