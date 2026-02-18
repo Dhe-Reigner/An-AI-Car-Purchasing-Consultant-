@@ -128,13 +128,36 @@ tech1,tech2,tech3 = st.columns(3)
 with tech1:
     st.subheader('Transmission Type',divider='rainbow')
     tech1 = px.pie(
-        filtered_df
+        filtered_df,
+        names='Transmission'
     )
+    st.plotly_chart(tech1,use_container_width=True)
+
+with tech2:
+    st.subheader('Fuel Type Distribution',divider='rainbow')
+    tech2 = px.bar(
+        df['Fuel Type'].value_counts()
+    )
+    st.plotly_chart(tech2,use_container_width=True)
+
+with tech3:
+    st.subheader('Cylinder Count',divider='rainbow')
+    tech3 = px.bar(
+        df['Cylinders'].value_counts()
+    )
+    st.plotly_chart(tech3,use_container_width=True)
 
 
+#------------Heatmap - Correlation Analysis---------
+st.subheader('🔥 Feature Correlation Heatmap',divider='rainbow')
 
+numeric_df = df[['Price','Mileage','Year','Cylinders']]
 
+corr = numeric_df.corr()
 
+fig, ax = plt.subplots()
+sns.heatmap(corr,annot=True,cmap='coolwarm',ax=ax)
+st.pyplot(fig)
 
 
 

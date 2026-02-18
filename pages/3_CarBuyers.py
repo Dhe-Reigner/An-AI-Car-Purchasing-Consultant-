@@ -21,6 +21,20 @@ st.subheader('List of Car Buyers with their Car Preferences')
 filtered_df = dataframe_explorer(df,case=True)
 st.dataframe(filtered_df,use_container_width=True)
 
+#---------------Overview KPIs-----------
+kpi1,kpi2,kpi3,kpi4 = st.columns(4)
+kpi1.metric('Total Buyers',len(filtered_df))
+kpi2.metric('Average Price',f'${df['Price'].mean():,.0f}')
+kpi3.metric('Top Manufacturer',df.groupby('Manufacturer')['Total'].sum().idxmax())
+kpi4.metric('Top Fuel Type',df.groupby('Fuel')['Total'].sum().idxmax())
+
+#----------Market Demand Analysis
+
+
+
+
+
+
 col1, col2 = st.columns(2)
 
 with col1:
