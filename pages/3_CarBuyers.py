@@ -29,8 +29,71 @@ kpi3.metric('Top Manufacturer',df.groupby('Manufacturer')['Total'].sum().idxmax(
 kpi4.metric('Top Fuel Type',df.groupby('Fuel')['Total'].sum().idxmax())
 
 #----------Market Demand Analysis
+manu_df = df.groupby("Manufacturer")['Total'].sum().reset_index()
 
+st.subheader('Total Buyers by Manufacturer',divider='rainbow')
+manu = px.bar(
+    manu_df.sort_values('Total',ascending=False),
+    x='Manufacturer',
+    y='Total'
+)
+st.plotly_chart(manu,use_container_width=True)
 
+st.subheader('Fuel Type Distribution',divider='rainbow')
+fuel_df = df.groupby('Fuel')['Total'].sum().reset_index()
+
+fuel = px.pie(
+    fuel_df,
+    names='Fuel',
+    values='Total'
+)
+st.plotly_chart(fuel,use_container_width=True)
+
+#----------Price & Performance Analysis--------
+st.subheader('Average Price vs Engine CC',divider='rainbow')
+engine_price = df.groupby('Engine CC')['Price'].mean().reset_index()
+
+engine = px.line(
+    engine_price,
+    x='Engine CC',
+    y='Price',
+    markers=True
+)
+st.plotly_chart(engine,use_container_width=True)
+
+st.subheader('Price Distribution by Transmission Type',divider='rainbow')
+box = px.box(
+    filtered_df,
+    x='Transmission',
+    y='Price'
+)
+st.plotly_chart(box,use_container_width=True)
+
+#--------Buyer Demographics(Gender Demand)----------
+st.subheader('Gender-Based Demand by Manufacturer',divider='rainbow')
+
+gender_df = df.groupby('Manufacturer')[['Male','Female','Unknown']].sum().reset_index()
+
+bar = px.bar(
+    gender_df,
+    x='Manufacturer',
+    y=['Male','Female','Unknown'],
+    barmode='stack'
+)
+st.plotly_chart(bar,use_container_width=True)
+
+#----------Relationship Analysis-------------
+st.subheader('Power vs Price(Bubble Size = Buyers)',divider='rainbow')
+scatter = px.scatter(
+    filtered_df,
+    x='Power',
+    y='Price',
+    size='Total',
+    color='Fuel'
+)
+st.plotly_chart(scatter,use_container_width=True)
+
+#--------Distribution Analysis-----------
 
 
 
