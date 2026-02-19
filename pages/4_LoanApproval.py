@@ -25,10 +25,10 @@ st.dataframe(filtered_df,use_container_width=True)
 
 
 numeric_cols = [
-    'loan_id', ' no_of_dependents', ' education', ' self_employed',
-       ' income_annum', ' loan_amount', ' loan_term', ' cibil_score',
-       ' residential_assets_value', ' commercial_assets_value',
-       ' luxury_assets_value', ' bank_asset_value', ' loan_status'
+    'loan_id', 'no_of_dependents', 'education', 'self_employed',
+       'income_annum', 'loan_amount', 'loan_term', 'cibil_score',
+       'residential_assets_value', 'commercial_assets_value',
+       'luxury_assets_value', 'bank_asset_value', 'loan_status'
 ]
 for col in numeric_cols:
     filtered_df[col] = (
@@ -36,18 +36,104 @@ for col in numeric_cols:
         .astype(str)
         .str.replace(',','',regex=True)
         .str.replace(r'[^\d.]','',regex=True)
-        .astype(float)
+     
     )
+    filtered_df[col] = pd.to_numeric(df[col],errors='coerce')
+
+#-----------Overview KPIs----------
 
 col1,col2,col3,col4,col5 = st.columns(5)
 
-approval_rate = (df[' loan_status'] == ' Approved').mean() * 100
+approval_rate = (df['loan_status'] == 'Approved').mean() * 100
 
 col1.metric('Total Applicants',len(filtered_df))
 col2.metric('Approval Rate (%)',round(approval_rate,2))
-col3.metric('Average Income'f'${df[' income_annum'].mean():,.0f}')
-col4.metric('Average Loan Amount',f"${df[' loan_amount'].mean():,.0f}")
-col5.metric('Average CIBIL Score',round(df[' cibil_score'].mean(),1))
+col3.metric('Average Income',f'${df['income_annum'].mean():,.0f}')
+col4.metric('Average Loan Amount',f"${df['loan_amount'].mean():,.0f}")
+col5.metric('Average CIBIL Score',round(df['cibil_score'].mean(),1))
+
+#----------Demographics----------
+col1,col2,col3 = st.columns(3)
+
+with col1:
+    st.subheader('Applicants by Education',divider='rainbow')
+    col1 = px.bar(
+        filtered_df,
+        x='education'
+    )
+    st.plotly_chart(col1,use_container_width=True)
+with col2:
+    st.subheader('Employment Type',divider='rainbow')
+    col2 = px.pie(
+        filtered_df,
+        names='self_employed'
+    )
+    st.plotly_chart(col2,use_container_width=True)
+with col3:
+    st.subheader('Number of Dependents Dsitribution',divider='rainbow')
+
+    dep_counts = (
+        df['no_of_dependents']
+        .value_counts()
+        .reset_index(name='count')
+        .rename(columns={'index': 'no_of_dependents'})
+    )
+    col3 = px.bar(
+        dep_counts,
+        x='no_of_dependents',
+        y='count',
+        labels={
+            'no_of_dependents': 'Number of Dependents',
+            'count': 'Applicants'
+        }
+    )
+    st.plotly_chart(col3,use_container_width=True)
+
+#----------Financial Analysis--------
+col1,col2 = st.columns(2)
+
+with col1:
+    st.subheader('Income Distribution',divider='rainbow')
+    col1 = px.histogram(
+        filtered_df,
+        x='income_annum',
+        nbins=30
+    )
+    st.plotly_chart(col1,use_container_width=True)
+with col2:
+    st.subheader('Income vs Loan Status')
+    col2 = px.box(
+        filtered_df,
+        x='loan_status',
+        y='income_annum'
+    )
+    st.plotly_chart(col2,use_container_width=True)
+
+#-------------Credit & Assets----------
+st.subheader('Credit Score vs Loan Amount', divider='rainbow')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
