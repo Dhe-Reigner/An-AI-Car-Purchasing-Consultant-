@@ -119,7 +119,21 @@ scatter = px.scatter(
 )
 st.plotly_chart(scatter,use_container_width=True)
 
+#---------Correlation Heatmap----------
+st.subheader('Financial Correlation Heatmap',divider='rainbow')
+corr_cols = [
+       'income_annum', 'loan_amount','cibil_score',
+       'residential_assets_value', 'commercial_assets_value',
+       'luxury_assets_value', 'bank_asset_value',
+]
+corr = filtered_df[corr_cols].corr()
 
+corr = px.imshow(
+    corr,
+    text_auto=True,
+    color_continuous_scale='RdBu'
+)
+st.plotly_chart(corr,use_container_width=True)
 
 
 

@@ -23,6 +23,67 @@ st.subheader('Handling Insurance Cost Drivers')
 filtered_df = dataframe_explorer(df,case=True)
 st.dataframe(filtered_df, use_container_width=True)
 
+#-------------Overview KPIs----------
+col1,col2,col3,col4 = st.columns(4)
+
+col1.metric('Total Policies',len(filtered_df))
+col2.metric('Total Premium', f'{filtered_df['PREMIUM'].sum():,.0f}')
+col3.metric('Average Insured Value',f'{filtered_df['INSURED_VALUE'].mean():,.0f}')
+col4.metric('Claim Ratio',f'{filtered_df['CLAIM_PAID'].sum()/df['PREMIUM'].sum():.2%}')
+
+#------------Demographic & Policy Analysis------------
+st.subheader('Policies by Gender',divider='rainbow')
+
+gender_df = filtered_df['SEX'].value_counts().reset_index(name='count')
+
+bar = px.bar(
+    gender_df,
+    x='PREMIUM',
+    y='count',
+    labels={'index':'Gender','count':'Policies'}
+)
+st.plotly_chart(bar,use_container_width=True)
+
+
+st.subheader('Vehicle Usage Distribution',divider='rainbow')
+
+usage_df = filtered_df['USAGE'].value_counts().reset_index(name='count')
+
+pie = px.pie(
+    usage_df,
+    names='index',
+    values='count'
+)
+st.plotly_chart(pie,use_container_width=True)
+
+#----------Vehicle & Premium Analysis--------
+st.subheader('Premium Trend Over Years',divider='rainbow')
+
+yearly = df.groupby('EFFECTIVE_YR')['PREMIUM'].sum().reset_index()
+
+line = px.line(
+    yearly,
+    x='EFFECTIVE_YR',
+    y='PREMIUM'
+)
+st.plotly_chart(line,use_container_width=True)
+
+st.subheader('Insured Value Distribution',divider='rainbow')
+
+histogram = px.histogram(
+    filtered_df,
+    x='INSURED_VALUE',
+    nbins=40
+)
+st.plotly_chart(histogram,use_container_width=True)
+
+#-------------Risk & Claims Analysis--------
+st.subheader('Insured Value vs Premium',divider='rainbow')
+
+scatter = 
+
+
+
 col1, col2 = st.columns(2)
 
 with col1:

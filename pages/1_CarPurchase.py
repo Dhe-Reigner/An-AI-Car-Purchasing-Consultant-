@@ -427,7 +427,7 @@ st.plotly_chart(box,use_container_width=True)
 st.divider()
 
 #-------------Correlation Heatmap----------
-st.subheader('🧠 Correlation  Heatmap')
+st.subheader('🧠 Correlation  Heatmap',divider='rainbow')
 
 numeric_df = df[
      ['Age','Annual Salary','Credit Card Debt','Net Worth','Car Purchase Amount']
