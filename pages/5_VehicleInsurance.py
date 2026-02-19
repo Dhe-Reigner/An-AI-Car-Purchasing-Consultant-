@@ -80,7 +80,43 @@ st.plotly_chart(histogram,use_container_width=True)
 #-------------Risk & Claims Analysis--------
 st.subheader('Insured Value vs Premium',divider='rainbow')
 
-scatter = 
+scatter = px.scatter(
+    filtered_df,
+    x='INSURED_VALUE',
+    y='PREMIUM',
+    color='TYPE_VEHICLE'
+)
+st.plotly_chart(scatter,use_container_width=True)
+
+st.subheader('Premium Distribution by Vehicle Type',divider='rainbow')
+
+box = px.box(
+    filtered_df,
+    x='TYPE_VEHICLE',
+    y='PREMIUM'
+)
+st.plotly_chart(box,use_container_width=True)
+
+#-----------Correlation Analysis------------
+st.subheader('Correlation Heatmap',divider='rainbow')
+
+numeric_cols = [
+    'INSURED_VALUE',
+    'PREMIUM',
+    'CLAIM_PAID',
+    'SEATS_NUM',
+    'CCM_TON'
+]
+corr = filtered_df[numeric_cols].corr()
+
+imshow = px.imshow(
+    corr,
+    text_auto=True,
+    color_continuous_scale='RdBu'
+)
+st.plotly_chart(imshow,use_container_width=True)
+
+
 
 
 
