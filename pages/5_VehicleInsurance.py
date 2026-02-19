@@ -116,8 +116,17 @@ imshow = px.imshow(
 )
 st.plotly_chart(imshow,use_container_width=True)
 
+#------------Claims Insight-----------
+st.subheader('Top 10 Makes by Claims Paid',divider='rainbow')
 
+claims_make = filtered_df.groupby('MAKE')['CLAIM_PAID'].sum().reset_index()
 
+bar = px.bar(
+    claims_make.sort_values('CLAIM_PAID', ascending=False).head(10),
+    x='MAKE',
+    y='CLAIM_PAID'
+)
+st.plotly_chart(bar,use_container_width=True)
 
 
 col1, col2 = st.columns(2)
