@@ -111,7 +111,13 @@ with col2:
 
 #-------------Credit & Assets----------
 st.subheader('Credit Score vs Loan Amount', divider='rainbow')
-
+scatter = px.scatter(
+    filtered_df,
+    x='cibil_score',
+    y='loan_amount',
+    color='loan_status'
+)
+st.plotly_chart(scatter,use_container_width=True)
 
 
 
