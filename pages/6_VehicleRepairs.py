@@ -23,6 +23,37 @@ st.subheader('Vehicle Diagnosis & Repairs Patterns')
 filtered_df = dataframe_explorer(df,case=True)
 st.dataframe(filtered_df,use_container_width=True)
 
+filtered_df.columns  =(
+    filtered_df.columns
+    .str.strip()
+    .str.replace(" ","_")
+    .str.lower()
+)
+
+#-------------Overview KPIs---------
+col1,col2,col3 = st.columns(3)
+
+
+col1.metric('Total Records',len(filtered_df))
+col2.metric('Unique Cars',filtered_df['car_name'].nunique())
+col3.metric('Unique Car Services',filtered_df['solution_used'].nunique())
+
+col11,col12,col13,col14,col15 = st.columns(5)
+
+
+col11.metric('Problem Classifications',filtered_df['problem_classification'].nunique())
+col12.metric('Problem Description',filtered_df['problem_description'].nunique())
+col13.metric('Problem Diagnosis',filtered_df['diagnosis'].nunique())
+col14.metric('Proposed Fixes',filtered_df['how_to_fix_the_problem'].nunique())
+col15.metric('Service History',filtered_df['service_history'].nunique())
+
+
+
+
+
+
+
+
 col1, col2 = st.columns(2)
 
 with col1:
