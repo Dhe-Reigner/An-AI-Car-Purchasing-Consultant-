@@ -38,7 +38,7 @@ col1.metric('Total Records',len(filtered_df))
 col2.metric('Unique Cars',filtered_df['car_name'].nunique())
 col3.metric('Unique Car Services',filtered_df['solution_used'].nunique())
 
-col11,col12,col13,col14,col15 = st.columns(5)
+col11,col12,col13,col14,col15,col16 = st.columns(6)
 
 
 col11.metric('Problem Classifications',filtered_df['problem_classification'].nunique())
@@ -46,12 +46,86 @@ col12.metric('Problem Description',filtered_df['problem_description'].nunique())
 col13.metric('Problem Diagnosis',filtered_df['diagnosis'].nunique())
 col14.metric('Proposed Fixes',filtered_df['how_to_fix_the_problem'].nunique())
 col15.metric('Service History',filtered_df['service_history'].nunique())
+col16.metric('Repair Succes Rate',
+            f"{round((filtered_df['repair_status'] == 'Successful').mean() * 100,1)}%"
+            )
+st.divider()
+
+#-------------Problem Distribution-------------
+col1,col2 = st.columns(2)
+
+with col1:
+    st.subheader('Problem Classification',divider='rainbow')
+    col1 = px.bar(
+        filtered_df,
+        x='problem_classification',
+        color=  'problem_classification'
+    )
+    st.plotly_chart(col1,use_container_width=True)
+
+with col2:
+    st.subheader('Top Vehicles by Problems',divider='rainbow')
+
+    car_counts = filtered_df['car_name'].value_counts().reset_index()
+    car_counts.columns = ['car_name','count']
 
 
+    col2 = px.bar(
+        car_counts,
+        x='car_name',
+        y='count',
+        labels={'car_name':'Car Name','count':'Number of Repairs'}
+    )
+    st.plotly_chart(col2,use_container_width=True)
 
+st.divider()
 
+#-------------Severity Analysis-----------
+col3,col4 = st.columns(2)
 
+with col3:
+    st.subheader('Severity Distribution',divider='rainbow')
+    pie = px.pie(
+        filtered_df,
+        names='severity',
+    )
+    st.plotly_chart(pie, use_container_width=True)
 
+with col4:
+    st.subheader('Severity by Problem Type',divider='rainbow')
+    box = px.box(
+        filtered_df,
+        x='problem_classification',
+        y='severity'
+    )
+    st.plotly_chart(box,use_container_width=True)
+st.divider()
+
+#-----------Diagnosis & Repair-----
+col5,col6 = st.columns(2)
+
+with col5:
+    st.subheader('Top Diagnosis',divider='rainbow')
+    bar = px.bar(
+        filtered_df['diagnosis'].value_counts().head(10).reset_index(),
+        x='diagnosis',
+        y='car_name',
+        labels={'car_name':'Diagnosis','Diagnosis':'Count'}
+    )
+    st.plotly_chart(bar,use_container_width=True)
+
+with col6:
+    st.subheader('Solution vs Repair Outcome',divider='rainbow')
+    bar = px.bar(
+        filtered_df,
+        x='solution_used',
+        color='repair_status',
+    )
+    st.plotly_chart(bar,use_container_width=True)
+
+st.divider()
+
+#--------------Heatmap-------------
 
 
 col1, col2 = st.columns(2)
