@@ -106,11 +106,16 @@ col5,col6 = st.columns(2)
 
 with col5:
     st.subheader('Top Diagnosis',divider='rainbow')
+    diagnosis_counts = filtered_df['diagnosis'].value_counts().head(10).reset_index()
+
+    diagnosis_counts.columns = ['diagnosis','count']
+
+
     bar = px.bar(
-        filtered_df['diagnosis'].value_counts().head(10).reset_index(),
+        diagnosis_counts,
         x='diagnosis',
-        y='car_name',
-        labels={'car_name':'Diagnosis','Diagnosis':'Count'}
+        y='count',
+        labels={'diagnosis':'Diagnosis','count':'Number of Cases'}
     )
     st.plotly_chart(bar,use_container_width=True)
 
@@ -126,14 +131,12 @@ with col6:
 st.divider()
 
 #--------------Heatmap-------------
-
-
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader('Most COmmon Vehicle Problems',divider='rainbow')
+    st.subheader('Most Common Vehicle Problems',divider='rainbow')
     problem_counts = (
-        filtered_df['PROBLEM DESCRIPTION']
+        filtered_df['problem_classification']
         .value_counts()
         .reset_index()
         .rename(columns={'index':'Problem','PROBLEM DESCRIPTION':'Count'})
