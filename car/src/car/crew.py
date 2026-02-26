@@ -20,16 +20,51 @@ class Car():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def car_purchase_analyst(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
+            config=self.agents_config['car_purchase_analyst'], # type: ignore[index]
             verbose=True
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def used_car_market_analyst(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
+            config=self.agents_config['used_car_market_analyst'], # type: ignore[index]
+            verbose=True
+        )
+    
+    @agent
+    def buyer_profiling_analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['buyer_profiling_analyst'], # type: ignore[index]
+            verbose=True
+        )
+
+    @agent
+    def loan_risk_analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['loan_risk_analyst'], # type: ignore[index]
+            verbose=True
+        )
+    
+    @agent
+    def insurance_risk_analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['insurance_risk_analyst'], # type: ignore[index]
+            verbose=True
+        )
+
+    @agent
+    def reliability_analyst(self) -> Agent:
+        return Agent(
+            config=self.agents_config['reliability_analyst'], # type: ignore[index]
+            verbose=True
+        )
+    
+    @agent
+    def final_recommendation_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['final_recommendation_agent'], # type: ignore[index]
             verbose=True
         )
 
@@ -37,15 +72,41 @@ class Car():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def car_purchase_analysis(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['car_purchase_analysis'], # type: ignore[index]
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def used_car_market_analysis(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
+            config=self.tasks_config['used_car_market_analysis'], # type: ignore[index]
+            output_file='report.md'
+        )
+    
+    @task
+    def loan_risk_analysis(self) -> Task:
+        return Task(
+            config=self.tasks_config['loan_risk_analysis'], # type: ignore[index]
+        )
+
+    @task
+    def insurance_risk_analysis(self) -> Task:
+        return Task(
+            config=self.tasks_config['insurance_risk_analysis'], # type: ignore[index]
+            output_file='report.md'
+        )
+    
+    @task
+    def reliability_analysis(self) -> Task:
+        return Task(
+            config=self.tasks_config['reliability_analysis'], # type: ignore[index]
+        )
+
+    @task
+    def final_recommendation(self) -> Task:
+        return Task(
+            config=self.tasks_config['final_recommendation'], # type: ignore[index]
             output_file='report.md'
         )
 

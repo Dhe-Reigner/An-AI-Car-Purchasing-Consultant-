@@ -1,17 +1,145 @@
-research_task:
+car_purchase_analysis:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
-  expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    Analyze the retrieved dataset context related to car purchasing behaviour.
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Focus on:
+    - Affordability levels
+    - Spending patterns
+    - Income-to-purchase ratio
+    - Financial capacity indicators
+
+    User Question:
+    {question}
+
+    Retrieved Context:
+    {context}
+
+    Provide:
+    - Key Financial Finding
+    - Supporting Data Evidence
+    - Insight Summary
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A structured financial behaviour analysis report.
+  agent: car_purchase_analyst
+
+
+used_car_market_analysis:
+  description: >
+    Analyze used car pricing trends and value positioning.
+
+    Focus on:
+    - Price ranges
+    - Depreciation indicators
+    - Value-for-money segments
+    - Market demand signals
+
+    User Question:
+    {question}
+
+    Retrieved Context:
+    {context}
+
+    Provide:
+    - Market Trend Summary
+    - Price Insight
+    - Value Assessment
+  expected_output: >
+    A structured market pricing analysis.
+  agent: used_car_market_analyst
+
+
+loan_risk_analysis:
+  description: >
+    Evaluate loan approval feasibility and financial risk exposure.
+
+    Focus on:
+    - Debt-to-income signals
+    - Credit risk patterns
+    - Approval probability indicators
+
+    User Question:
+    {question}
+
+    Retrieved Context:
+    {context}
+
+    Provide:
+    - Risk Assessment
+    - Approval Likelihood Insight
+    - Financing Recommendation
+  expected_output: >
+    A structured loan risk evaluation.
+  agent: loan_risk_analyst
+
+
+insurance_risk_analysis:
+  description: >
+    Assess insurance burden and premium risk indicators.
+
+    Focus on:
+    - Insurance cost categories
+    - Risk classification
+    - Affordability impact
+
+    User Question:
+    {question}
+
+    Retrieved Context:
+    {context}
+
+    Provide:
+    - Insurance Risk Level
+    - Cost Impact Summary
+    - Risk Advisory
+  expected_output: >
+    A structured insurance risk report.
+  agent: insurance_risk_analyst
+
+
+reliability_analysis:
+  description: >
+    Analyze maintenance frequency and repair exposure.
+
+    Focus on:
+    - Repair trends
+    - Maintenance cost burden
+    - Long-term ownership risk
+
+    User Question:
+    {question}
+
+    Retrieved Context:
+    {context}
+
+    Provide:
+    - Reliability Score Insight
+    - Repair Risk Summary
+    - Ownership Cost Advisory
+  expected_output: >
+    A structured vehicle reliability analysis.
+  agent: reliability_analyst
+
+
+final_recommendation:
+  description: >
+    Combine outputs from all prior analytical agents.
+
+    Consider:
+    - Financial affordability
+    - Loan feasibility
+    - Insurance burden
+    - Maintenance reliability
+    - Market value
+    - Buyer profile alignment
+
+    Generate a final executive recommendation including:
+
+    - Recommended Vehicle Segment
+    - Ideal Budget Range
+    - Risk Level Summary
+    - Financial Sustainability Assessment
+    - Strategic Justification
+
+  expected_output: >
+    A comprehensive executive-level automotive recommendation report.
+  agent: final_recommendation_agent
