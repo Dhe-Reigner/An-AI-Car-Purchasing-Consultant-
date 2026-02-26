@@ -1,145 +1,165 @@
 car_purchase_analysis:
   description: >
-    Analyze the retrieved dataset context related to car purchasing behaviour.
+    Evaluate the buyer’s financial capacity for vehicle acquisition.
 
-    Focus on:
-    - Affordability levels
-    - Spending patterns
-    - Income-to-purchase ratio
-    - Financial capacity indicators
+    Use:
+    - Annual salary
+    - Credit card debt
+    - Net worth
+    - Intended budget
 
-    User Question:
+    Calculate:
+    - Debt-to-Income Ratio (DTI)
+    - Income-to-Car-Price Ratio
+    - Recommended Safe Budget Range
+    - Monthly Payment Sustainability Estimate
+
+    User Input:
     {question}
 
     Retrieved Context:
     {context}
 
-    Provide:
-    - Key Financial Finding
-    - Supporting Data Evidence
-    - Insight Summary
+    Output Format:
+    - Affordability Tier (Low / Moderate / Strong)
+    - Safe Budget Range
+    - Financial Risk Flags
+    - Summary Insight
   expected_output: >
-    A structured financial behaviour analysis report.
+    Structured affordability analysis with quantitative thresholds.
   agent: car_purchase_analyst
+
+
+buyer_profile_analysis:
+  description: >
+    Determine vehicle segment alignment using demographic patterns.
+
+    Analyze:
+    - Age
+    - Gender
+    - Country
+    - Income bracket
+    - Historical buyer trends
+
+    Identify:
+    - Most suitable vehicle segment (SUV, Sedan, Hatchback, etc.)
+    - Preferred manufacturer category
+    - Behavioral fit score
+
+    Output Format:
+    - Recommended Vehicle Segment
+    - Buyer Trend Alignment Score
+    - Justification
+  expected_output: >
+    Structured buyer-segment alignment report.
+  agent: buyer_profiling_analyst
+
+
 
 
 used_car_market_analysis:
   description: >
-    Analyze used car pricing trends and value positioning.
+    Evaluate best-value vehicles within affordability range.
 
-    Focus on:
-    - Price ranges
-    - Depreciation indicators
-    - Value-for-money segments
-    - Market demand signals
+    Analyze:
+    - Price distribution
+    - Mileage efficiency
+    - Model year
+    - Depreciation exposure
 
-    User Question:
-    {question}
-
-    Retrieved Context:
-    {context}
-
-    Provide:
-    - Market Trend Summary
-    - Price Insight
-    - Value Assessment
+    Output:
+    - Top Value Segment
+    - Depreciation Risk Tier
+    - Price-to-Mileage Efficiency Insight
+    - Market Recommendation Summary
   expected_output: >
-    A structured market pricing analysis.
+    Structured used car value optimization report.
   agent: used_car_market_analyst
-
 
 loan_risk_analysis:
   description: >
-    Evaluate loan approval feasibility and financial risk exposure.
+    Assess loan approval probability and financing sustainability.
 
-    Focus on:
-    - Debt-to-income signals
-    - Credit risk patterns
-    - Approval probability indicators
+    Evaluate:
+    - Credit score band
+    - Debt-to-income
+    - Loan term
+    - Asset strength
 
-    User Question:
-    {question}
-
-    Retrieved Context:
-    {context}
-
-    Provide:
-    - Risk Assessment
-    - Approval Likelihood Insight
-    - Financing Recommendation
+    Output:
+    - Approval Probability Tier
+    - Recommended Loan Term
+    - EMI Risk Level
+    - Financing Advisory
   expected_output: >
-    A structured loan risk evaluation.
+    Structured financing feasibility assessment.
   agent: loan_risk_analyst
 
 
 insurance_risk_analysis:
   description: >
-    Assess insurance burden and premium risk indicators.
+    Estimate vehicle insurance burden relative to buyer income.
 
-    Focus on:
-    - Insurance cost categories
-    - Risk classification
-    - Affordability impact
+    Evaluate:
+    - Vehicle type
+    - Engine capacity
+    - Usage category
+    - Claim history risk
+    - Insurance-to-income ratio
 
-    User Question:
-    {question}
-
-    Retrieved Context:
-    {context}
-
-    Provide:
-    - Insurance Risk Level
-    - Cost Impact Summary
-    - Risk Advisory
+    Output:
+    - Insurance Risk Tier
+    - Estimated Premium Band
+    - Affordability Impact
+    - Advisory Note
   expected_output: >
-    A structured insurance risk report.
+    Structured insurance burden report.
   agent: insurance_risk_analyst
 
 
 reliability_analysis:
   description: >
-    Analyze maintenance frequency and repair exposure.
+    Evaluate long-term maintenance and repair risk exposure.
 
-    Focus on:
-    - Repair trends
-    - Maintenance cost burden
-    - Long-term ownership risk
+    Analyze:
+    - Problem classification
+    - Severity distribution
+    - Repair recurrence frequency
+    - Service history patterns
 
-    User Question:
-    {question}
-
-    Retrieved Context:
-    {context}
-
-    Provide:
-    - Reliability Score Insight
-    - Repair Risk Summary
-    - Ownership Cost Advisory
+    Output:
+    - Reliability Tier (High / Medium / Low)
+    - Maintenance Risk Score
+    - Expected Long-Term Cost Exposure
+    - Ownership Advisory
   expected_output: >
-    A structured vehicle reliability analysis.
+    Structured vehicle reliability risk report.
   agent: reliability_analyst
 
 
 final_recommendation:
   description: >
-    Combine outputs from all prior analytical agents.
+    Integrate outputs from all analytical agents using weighted scoring.
 
     Consider:
-    - Financial affordability
-    - Loan feasibility
-    - Insurance burden
-    - Maintenance reliability
-    - Market value
-    - Buyer profile alignment
+    - Financial Sustainability Score
+    - Loan Feasibility Tier
+    - Market Value Efficiency
+    - Reliability Tier
+    - Insurance Risk Tier
+    - Buyer Profile Alignment Score
 
-    Generate a final executive recommendation including:
+    Generate:
 
-    - Recommended Vehicle Segment
-    - Ideal Budget Range
-    - Risk Level Summary
-    - Financial Sustainability Assessment
-    - Strategic Justification
+    1. Recommended Vehicle Segment
+    2. Ideal Price Range
+    3. New vs Used Recommendation
+    4. Risk Summary (Low / Moderate / Elevated)
+    5. Total Cost of Ownership Outlook
+    6. Final Strategic Recommendation
+
+    Provide a concise executive summary followed by structured bullet insights.
 
   expected_output: >
-    A comprehensive executive-level automotive recommendation report.
+    Executive-level, risk-aware, financially optimized vehicle recommendation report.
   agent: final_recommendation_agent
