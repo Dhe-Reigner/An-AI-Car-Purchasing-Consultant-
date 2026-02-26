@@ -106,8 +106,37 @@ Welcome to your intelligent car buying assistant.
                         st.header('📊 Detailed Analysis Reports')
 
                         files = [
-                            'affordability_analysis'
+                            'affordability_analysis.md',
+                            'loan_eligibility.md',
+                            'market_trends.md',
+                            'insurance_estimate.md',
+                            'reliability_report.md',
+                            'final_recommendations.md'
                         ]
+
+                        combined_content = ""
+
+                        for file in files:
+                            try:
+                                with open(file,'r') as f:
+                                    content = f.read()
+                                    st.subheader(file.replace(".md","").replace("_"," ").title())
+                                    st.markdown(content)
+                                    combined_content += content + "\n\n"
+                            except FileNotFoundError:
+                                st.warning(f"{file} not found.")
+                            except Exception as e:
+                                st.error(f"Error reading {file}: {e}")
+
+                        if combined_content:
+                            st.download_button(
+                                label='📥 Download Full Recommendation Report',
+                                data=combined_content,
+                                file_name='car_recommendation_report.md',
+                                mime='text/markdown'
+                            )
+                    except Exception as e:
+                        st.error(f"An unexpected error occured: {e}")
 
 
 if __name__=='__main__':
