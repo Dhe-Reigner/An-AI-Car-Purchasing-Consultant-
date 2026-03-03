@@ -1,5 +1,6 @@
 import streamlit as st
-from .crew import Mycrew
+#from crew import Car
+from car.src.car.crew import Car
 from dotenv import load_dotenv
 import os
 
@@ -7,7 +8,7 @@ load_dotenv()
 
 def main():
     st.set_page_config(page_title='AI Car Purchase Recommendation Engine',page_icon="🚗")
-    st.title('🚗 AI-Powered Car Purchase Recommendation Engine')
+    st.title='🚗 AI-Powered Car Purchase Recommendation Engine'
 
     st.markdown("""
 Welcome to your intelligent car buying assistant.
@@ -44,7 +45,7 @@ Welcome to your intelligent car buying assistant.
 
             loan_term = st.selectbox('🏦Preferred Loan Term (Years)',[1,3,5,7])
             budget = st.number_input('💰Budget for Car ($)',min_value=0.0, step=1000.0)
-            car_condition = st.number_input('🚘Car Condition Preference',['New','Used','Either'])
+            car_condition = st.selectbox('🚘Car Condition Preference',['New','Used','Either'])
 
         st.header('Vehicle Preferences')
 
@@ -58,7 +59,7 @@ Welcome to your intelligent car buying assistant.
 
         with col4:
             usage = st.selectbox('🛣️Primary Usage',['Personal','Family','Business','Commercial'])
-            mileage_preference = st.selectbox('📉Mileage Preference'['Low Mileage','Moderate','No Preference'])
+            mileage_preference = st.selectbox('📉Mileage Preference',['Low Mileage','Moderate','No Preference'])
             insurance_sensitivity = st.selectbox('🛡️Insurance Cost Sensitivity',['Low Premium Preferred','Not a Concern'])
             reliability_priority = st.selectbox('🛠️Reliability Importance',['Very Important','Moderate','Not a Priority'])
         
@@ -95,7 +96,7 @@ Welcome to your intelligent car buying assistant.
 
                 with st.spinner('Analyzing financial profile, market trends,insurance risk and repair history...'):
                     try:
-                        my_crew_instance = Mycrew()
+                        my_crew_instance = Car()
                         crew_instance = my_crew_instance.crew()
                         crew_result = crew_instance.kickoff(inputs=inputs)
 
