@@ -110,6 +110,7 @@ Welcome to your intelligent car buying assistant.
 
                     files = [
                         'affordability_analysis.md',
+                        'car_market.md',
                         'loan_eligibility.md',
                         'market_trends.md',
                         'insurance_estimate.md',

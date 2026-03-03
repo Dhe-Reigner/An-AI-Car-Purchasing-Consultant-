@@ -75,39 +75,42 @@ class Car():
     def car_purchase_analysis(self) -> Task:
         return Task(
             config=self.tasks_config['car_purchase_analysis'], # type: ignore[index]
+            output_file='affordability_analysis.md'
         )
 
     @task
     def used_car_market_analysis(self) -> Task:
         return Task(
             config=self.tasks_config['used_car_market_analysis'], # type: ignore[index]
-            output_file='report.md'
+            output_file='car_market.md'
         )
     
     @task
     def loan_risk_analysis(self) -> Task:
         return Task(
             config=self.tasks_config['loan_risk_analysis'], # type: ignore[index]
+            output_file='loan_eligibility.md'
         )
 
     @task
     def insurance_risk_analysis(self) -> Task:
         return Task(
             config=self.tasks_config['insurance_risk_analysis'], # type: ignore[index]
-            output_file='report.md'
+            output_file='insurance_estimate.md'
         )
     
     @task
     def reliability_analysis(self) -> Task:
         return Task(
             config=self.tasks_config['reliability_analysis'], # type: ignore[index]
+            output_file='reliability_report.md'
         )
 
     @task
     def final_recommendation(self) -> Task:
         return Task(
             config=self.tasks_config['final_recommendation'], # type: ignore[index]
-            output_file='report.md'
+            output_file='final_recommendations.md'
         )
 
     @crew
