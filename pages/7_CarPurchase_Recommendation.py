@@ -98,7 +98,7 @@ Welcome to your intelligent car buying assistant.
                     try:
                         my_crew_instance = Car()
                         crew_instance = my_crew_instance.crew()
-                        crew_result = crew_instance.kickoff(inputs=inputs)
+                        crew_result = crew_instance.kickoff(inputs={'inputs':inputs})
 
                         st.subheader('🚘 Your Personalized Car Recommendations')
                         st.markdown(crew_result)
