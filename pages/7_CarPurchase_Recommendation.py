@@ -6,6 +6,8 @@ import os
 
 load_dotenv()
 
+os.getenv('HUGGINGFACE_API_KEY')
+
 def main():
     st.set_page_config(page_title='AI Car Purchase Recommendation Engine',page_icon="🚗")
     st.title='🚗 AI-Powered Car Purchase Recommendation Engine'
@@ -63,81 +65,81 @@ Welcome to your intelligent car buying assistant.
             insurance_sensitivity = st.selectbox('🛡️Insurance Cost Sensitivity',['Low Premium Preferred','Not a Concern'])
             reliability_priority = st.selectbox('🛠️Reliability Importance',['Very Important','Moderate','Not a Priority'])
         
-        if st.button('🔍 Generate Car Recommendation'):
-            required_fields = [
-                name,age,gender,country,annual_salary,net_worth,cibil_score,budget,transmission,fuel_type
-            ]
+    if st.button('🔍 Generate Car Recommendation'):
+        required_fields = [
+            name,age,gender,country,annual_salary,net_worth,cibil_score,budget,transmission,fuel_type
+        ]
 
-            if not all(required_fields):
-                st.error('Please fill in all required fileds to generate recommendation')
-            else:
-                inputs = {
-                    'name':name,
-                    'age':age,
-                    'gender':gender,
-                    'annual_salary':annual_salary,
-                    'credit_card_debt':credit_card_debt,
-                    'net_worth':net_worth,
-                    'credit_score':cibil_score,
-                    'dependents':dependents,
-                    'employment_status':employment_status,
-                    'loan_term':loan_term,
-                    'budget':budget,
-                    'car_condition':car_condition,
-                    'transmission':transmission,
-                    'fuel_type':fuel_type,
-                    'body_type':body_type,
-                    'seats':seats,
-                    'usage':usage,
-                    'mileage_preference':mileage_preference,
-                    'insurance_sensitivity':insurance_sensitivity,
-                    'reliability_priority':reliability_priority
-                }
+        if not all(required_fields):
+            st.error('Please fill in all required fileds to generate recommendation')
+        else:
+            inputs = {
+                'name':name,
+                'age':age,
+                'gender':gender,
+                'annual_salary':annual_salary,
+                'credit_card_debt':credit_card_debt,
+                'net_worth':net_worth,
+                'credit_score':cibil_score,
+                'dependents':dependents,
+                'employment_status':employment_status,
+                'loan_term':loan_term,
+                'budget':budget,
+                'car_condition':car_condition,
+                'transmission':transmission,
+                'fuel_type':fuel_type,
+                'body_type':body_type,
+                'seats':seats,
+                'usage':usage,
+                'mileage_preference':mileage_preference,
+                'insurance_sensitivity':insurance_sensitivity,
+                'reliability_priority':reliability_priority
+            }
 
-                with st.spinner('Analyzing financial profile, market trends,insurance risk and repair history...'):
-                    try:
-                        my_crew_instance = Car()
-                        crew_instance = my_crew_instance.crew()
-                        crew_result = crew_instance.kickoff(inputs={'inputs':inputs})
+            with st.spinner('Analyzing financial profile, market trends,insurance risk and repair history...'):
+                try:
+                    my_crew_instance = Car()
+                    crew_instance = my_crew_instance.crew()
+                    crew_result = crew_instance.kickoff(inputs={'inputs':inputs})
 
-                        st.subheader('🚘 Your Personalized Car Recommendations')
-                        st.markdown(crew_result)
+                    st.subheader('🚘 Your Personalized Car Recommendations')
+                    st.markdown(crew_result)
 
-                        st.write('---')
-                        st.header('📊 Detailed Analysis Reports')
+                    st.write('---')
+                    st.header('📊 Detailed Analysis Reports')
 
-                        files = [
-                            'affordability_analysis.md',
-                            'loan_eligibility.md',
-                            'market_trends.md',
-                            'insurance_estimate.md',
-                            'reliability_report.md',
-                            'final_recommendations.md'
-                        ]
+                    files = [
+                        'affordability_analysis.md',
+                        'loan_eligibility.md',
+                        'market_trends.md',
+                        'insurance_estimate.md',
+                        'reliability_report.md',
+                        'final_recommendations.md'
+                    ]
 
-                        combined_content = ""
+                    combined_content = ""
 
-                        for file in files:
-                            try:
-                                with open(file,'r') as f:
-                                    content = f.read()
-                                    st.subheader(file.replace(".md","").replace("_"," ").title())
-                                    st.markdown(content)
-                                    combined_content += content + "\n\n"
-                            except FileNotFoundError:
-                                st.warning(f"{file} not found.")
-                            except Exception as e:
-                                st.error(f"Error reading {file}: {e}")
+                    for file in files:
+                        try:
+                            with open(file,'r') as f:
+                                content = f.read()
+                                st.subheader(file.replace(".md","").replace("_"," ").title())
+                                st.markdown(content)
+                                combined_content += content + "\n\n"
+                        except FileNotFoundError:
+                            st.warning(f"{file} not found.")
+                        except Exception as e:
+                            st.error(f"Error reading {file}: {e}")
 
-                        if combined_content:
-                            st.download_button(
-                                label='📥 Download Full Recommendation Report',
-                                data=combined_content,
-                                file_name='car_recommendation_report.md',
-                                mime='text/markdown'
-                            )
-                    except Exception as e:
-                        st.error(f"An unexpected error occured: {e}")
+                    if combined_content:
+                        st.download_button(
+                            label='📥 Download Full Recommendation Report',
+                            data=combined_content,
+                            file_name='car_recommendation_report.md',
+                            mime='text/markdown'
+                        )
+                except Exception as e:
+                    st.error(f"An unexpected error occured: {e}")
 
 
 if __name__=='__main__':
