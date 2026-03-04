@@ -330,7 +330,7 @@ a2.metric('Average Car Purchase($)',f"{df['Car Purchase Amount'].mean():,.0f}")
 a3.metric('Average Annual Salary ($)',f'{df['Annual Salary'].mean():,.0f}')
 a4.metric('Average Net Worth ($)',f"{df['Net Worth'].mean():,.0f}")
 
-st.divider()
+#st.divider()
 
 #----------Demographics----------
 st.subheader('👥 Demographic Analysis',divider='rainbow')
