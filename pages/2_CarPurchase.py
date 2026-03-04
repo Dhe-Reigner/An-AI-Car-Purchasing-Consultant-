@@ -322,7 +322,7 @@ for col in money_cols:
      df[col] = clean_currency(df[col])
 
 #-------------KPIs-------------
-st.subheader('📊Key Metrics')
+st.subheader('📊Key Metrics',divider='rainbow')
 a1,a2,a3,a4 = st.columns(4)
 
 a1.metric('Total Buyers',len(filtered_df))
@@ -333,14 +333,15 @@ a4.metric('Average Net Worth ($)',f"{df['Net Worth'].mean():,.0f}")
 st.divider()
 
 #----------Demographics----------
-st.subheader('👥 Demographic Analysis')
+st.subheader('👥 Demographic Analysis',divider='rainbow')
 
 demo1,demo2,demo3 = st.columns(3)
 
 with demo1:
      st.subheader('Buyers by Country',divider='rainbow')
      fig = px.bar(df['Country'].value_counts().reset_index(name='Count'),
-                  x='Country', y='Count',
+                  x='Country', 
+                  y='Count',
                   )
      st.plotly_chart(fig,use_container_width=True)
      
@@ -354,15 +355,16 @@ with demo3:
      fig3 = px.histogram(filtered_df,x='Age',nbins=20)
      st.plotly_chart(fig3,use_container_width=True)
 
-st.divider()
+# st.divider()
+
 
 #------------Income & Purchase---------
-st.subheader('💰 Income vs Car Purchase Behavior')
+st.subheader('💰 Income vs Car Purchase Behavior',divider='rainbow')
 
-car1, car2 = st.columns(2)
+car1, car2,car3 = st.columns(3)
 
 with car1:
-     st.subheader('Annual Salary vs Car Purchase Amount')
+     st.subheader('Annual Salary vs Car Purchase Amount',divider='rainbow')
      car1 = px.scatter(
           filtered_df,
           x='Annual Salary',
@@ -372,7 +374,7 @@ with car1:
      st.plotly_chart(car1,use_container_width=True)
 
 with car2:
-     st.subheader('Annual Salary by Gender')
+     st.subheader('Annual Salary by Gender',divider='rainbow')
      car2 = px.box(
           filtered_df,
           x='Gender',
@@ -380,26 +382,46 @@ with car2:
      )
      st.plotly_chart(car2,use_container_width=True)
 
+with car3:
+     st.subheader('Annual Salary Distribution',divider='rainbow')
+     car3 = px.histogram(filtered_df,
+                         x='Annual Salary',
+                         nbins=30
+                         )
+     st.plotly_chart(car3, use_container_width=True)
 
-# Line Chart
-st.subheader('Average Car Purchase Amount by Age',divider='rainbow')
-avg_by_age = df.groupby('Age')['Car Purchase Amount'].mean().reset_index()
-avg = px.line(
-     avg_by_age,
-     x='Age',
-     y='Car Purchase Amount'
-)
-st.plotly_chart(avg,use_container_width=True)
+#Line Charts
 
-st.divider()
+age1, age2 = st.columns(2)
+
+with age1:
+     st.subheader('Annual Income by Age',divider='rainbow')
+     avg_by_age1 = df.groupby('Age')['Annual Salary'].mean().reset_index()
+     age1 = px.line(avg_by_age1,
+                   x='Age',
+                   y='Annual Salary'
+                     )
+     st.plotly_chart(age1,use_container_width=True)
+
+with age2:
+     st.subheader('Average Car Purchase Amount by Age', divider='rainbow')
+     avg_by_age2 = df.groupby('Age')['Car Purchase Amount'].mean().reset_index()
+     age2 = px.line(avg_by_age2,
+                    x='Age',
+                    y='Car Purchase Amount'
+                    )
+     st.plotly_chart(age2,use_container_width=True)
+
+
+# st.divider()
 
 #-----------Debt & Wealth---------
-st.subheader('📉Debt & Net Worth Analysis')
+st.subheader('📉Debt & Net Worth Analysis',divider='rainbow')
 
-debt1, debt2 = st.columns(2)
+debt1, debt2,debt3  = st.columns(3)
 
 with debt1:
-     st.subheader('Credit Card Debt Distribution')
+     st.subheader('Credit Card Debt Distribution',divider='rainbow')
      debt1 = px.histogram(
           filtered_df,
           x='Credit Card Debt',
@@ -408,13 +430,42 @@ with debt1:
      st.plotly_chart(debt1,use_container_width=True)
 
 with debt2:
-     st.subheader('Credit Card Debt vs Car Purchase')
+     st.subheader('Credit Card Debt vs Car Purchase',divider='rainbow')
      debt2 = px.scatter(
           filtered_df,
           x='Credit Card Debt',
           y='Car Purchase Amount'
      )
      st.plotly_chart(debt2,use_container_width=True)
+
+with debt3:
+     st.subheader('Net Worth Distribution',divider='rainbow')
+     debt3 = px.histogram(filtered_df,
+                          x='Net Worth',
+                          nbins=30)
+     st.plotly_chart(debt3,use_container_width=True)
+
+# Line Graph
+net1, net2 = st.columns(2)
+
+with net1:
+     st.subheader('Credit Card Debt by Age',divider='rainbow')
+     avg_by_net1 = df.groupby('Age')['Credit Card Debt'].mean().reset_index()
+     net1 = px.line(avg_by_net1,
+                    x='Age',
+                    y='Credit Card Debt'
+                    )
+     st.plotly_chart(net1,use_container_width=True)
+
+with net2:
+     st.subheader('Net Worth by Age',divider='rainbow')
+     avg_by_net2 = df.groupby('Age')['Net Worth'].mean().reset_index()
+     net2 = px.line(avg_by_net2,
+                    x='Age',
+                    y='Net Worth'
+                    )
+     st.plotly_chart(net2,use_container_width=True)
+
 
 st.subheader('Net Worth Distribution by Country',divider='rainbow')
 box = px.box(
@@ -424,7 +475,9 @@ box = px.box(
 )
 st.plotly_chart(box,use_container_width=True)
 
-st.divider()
+# st.divider()
+
+
 
 #-------------Correlation Heatmap----------
 st.subheader('🧠 Correlation  Heatmap',divider='rainbow')
@@ -462,7 +515,7 @@ st.pyplot(fig)
 
 
 #------------AI Interation Section----------
-st.divider()
+# st.divider()
 st.subheader('🤖Ask the Data(AI-Powered Insights)')
 
 st.markdown(
