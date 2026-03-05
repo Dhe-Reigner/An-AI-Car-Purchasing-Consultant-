@@ -9,7 +9,7 @@ import os
 
 #--------------Page Config-------
 st.set_page_config(layout='wide')
-st.title('Loan Approval Analysis')
+st.title='Loan Approval Analysis'
 
 #--------------Load Data---------
 df = pd.read_csv('dataset/LoanApproval.csv')
@@ -53,6 +53,7 @@ col4.metric('Average Loan Amount',f"${filtered_df['loan_amount'].mean():,.0f}")
 col5.metric('Average CIBIL Score',round(filtered_df['cibil_score'].mean(),1))
 
 #----------Demographics----------
+st.subheader('👥 Demographic Analysis', divider='rainbow')
 col1,col2,col3 = st.columns(3)
 
 with col1:
@@ -90,6 +91,7 @@ with col3:
     st.plotly_chart(col3,use_container_width=True)
 
 #----------Financial Analysis--------
+st.subheader('💸Financial Analysis',divider='rainbow')
 col1,col2 = st.columns(2)
 
 with col1:
@@ -101,7 +103,7 @@ with col1:
     )
     st.plotly_chart(col1,use_container_width=True)
 with col2:
-    st.subheader('Income vs Loan Status')
+    st.subheader('Income vs Loan Status',divider='rainbow')
     col2 = px.box(
         filtered_df,
         x='loan_status',
@@ -119,44 +121,8 @@ scatter = px.scatter(
 )
 st.plotly_chart(scatter,use_container_width=True)
 
-#---------Correlation Heatmap----------
-st.subheader('Financial Correlation Heatmap',divider='rainbow')
-corr_cols = [
-       'income_annum', 'loan_amount','cibil_score',
-       'residential_assets_value', 'commercial_assets_value',
-       'luxury_assets_value', 'bank_asset_value',
-]
-corr = filtered_df[corr_cols].corr()
-
-corr = px.imshow(
-    corr,
-    text_auto=True,
-    color_continuous_scale='RdBu'
-)
-st.plotly_chart(corr,use_container_width=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#----------Loan Amounts-----------
+st.subheader('💳Loan Amounts',divider='rainbow')
 col1,col2 = st.columns(2)
  
 with col1:
@@ -181,6 +147,22 @@ with col2:
         title='Income Distribution for Approved vs Rejected Loans'
     )
     st.plotly_chart(fig2, use_container_width=True)
+
+#---------Correlation Heatmap----------
+st.subheader('Financial Correlation Heatmap',divider='rainbow')
+corr_cols = [
+       'income_annum', 'loan_amount','cibil_score',
+       'residential_assets_value', 'commercial_assets_value',
+       'luxury_assets_value', 'bank_asset_value',
+]
+corr = filtered_df[corr_cols].corr()
+
+corr = px.imshow(
+    corr,
+    text_auto=True,
+    color_continuous_scale='RdBu'
+)
+st.plotly_chart(corr,use_container_width=True)
 
 #-------------AI Interaction Section----------
 st.divider()
