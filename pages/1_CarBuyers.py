@@ -12,7 +12,7 @@ import os
 st.set_page_config(layout='wide')
 st.title='Car Buyers Market Behaviour'
 
-#-----------Load Data------------
+#-----------Load Data------------j
 df=pd.read_csv('dataset/CarBuyers.csv')
 
 #------------Analytics Section------
@@ -21,14 +21,24 @@ st.subheader('List of Car Buyers with their Car Preferences')
 filtered_df = dataframe_explorer(df,case=True)
 st.dataframe(filtered_df,use_container_width=True)
 
+filtered_df['Total']=(
+    filtered_df['Total']
+    .astype(str)
+    .str.replace(',','',regex=False)
+    .astype(float)
+)
+
 #---------------Overview KPIs-----------
-kpi1,kpi2,kpi3,kpi4 = st.columns(4)
+st.subheader('📊Key Metrics',divider='rainbow')
+kpi1,kpi2,kpi3,kpi4,kpi5 = st.columns(5)
 kpi1.metric('Total Buyers',len(filtered_df))
+kpi5.metric('Total Buyers Selected',f'{int(filtered_df['Total'].sum()):,}')
 kpi2.metric('Average Price',f'${df['Price'].mean():,.0f}')
 kpi3.metric('Top Manufacturer',df.groupby('Manufacturer')['Total'].sum().idxmax())
 kpi4.metric('Top Fuel Type',df.groupby('Fuel')['Total'].sum().idxmax())
 
 #----------Market Demand Analysis
+
 manu_df = df.groupby("Manufacturer")['Total'].sum().reset_index()
 
 st.subheader('Total Buyers by Manufacturer',divider='rainbow')
@@ -37,6 +47,11 @@ manu = px.bar(
     x='Manufacturer',
     y='Total'
 )
+st.plotly_chart(manu,use_container_width=True)
+st.subheader('Total Buyers by Manufacturers',divider='rainbow')
+manu = px.bar(filtered_df,
+              x='Manufacturer',
+              y='Total')
 st.plotly_chart(manu,use_container_width=True)
 
 

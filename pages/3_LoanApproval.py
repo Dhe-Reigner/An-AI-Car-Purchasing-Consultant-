@@ -9,7 +9,7 @@ import os
 
 #--------------Page Config-------
 st.set_page_config(layout='wide')
-st.title='Loan Approval Analysis'
+st.title('Loan Approval Analysis')
 
 #--------------Load Data---------
 df = pd.read_csv('dataset/LoanApproval.csv')
@@ -25,10 +25,10 @@ st.dataframe(filtered_df,use_container_width=True)
 
 
 numeric_cols = [
-    'loan_id', 'no_of_dependents', 'education', 'self_employed',
+    'loan_id', 'no_of_dependents',
        'income_annum', 'loan_amount', 'loan_term', 'cibil_score',
        'residential_assets_value', 'commercial_assets_value',
-       'luxury_assets_value', 'bank_asset_value', 'loan_status'
+       'luxury_assets_value', 'bank_asset_value'
 ]
 for col in numeric_cols:
     filtered_df[col] = (
@@ -38,19 +38,19 @@ for col in numeric_cols:
         .str.replace(r'[^\d.]','',regex=True)
      
     )
-    filtered_df[col] = pd.to_numeric(df[col],errors='coerce')
+    filtered_df[col] = pd.to_numeric(filtered_df[col],errors='coerce')
 
 #-----------Overview KPIs----------
-
+st.subheader('📊Key Metrics',divider='rainbow')
 col1,col2,col3,col4,col5 = st.columns(5)
 
-approval_rate = (df['loan_status'] == 'Approved').mean() * 100
+approval_rate = (filtered_df['loan_status'] == 'Approved').mean() * 100
 
 col1.metric('Total Applicants',len(filtered_df))
 col2.metric('Approval Rate (%)',round(approval_rate,2))
-col3.metric('Average Income',f'${df['income_annum'].mean():,.0f}')
-col4.metric('Average Loan Amount',f"${df['loan_amount'].mean():,.0f}")
-col5.metric('Average CIBIL Score',round(df['cibil_score'].mean(),1))
+col3.metric('Average Income',f"${filtered_df['income_annum'].mean():,.0f}")
+col4.metric('Average Loan Amount',f"${filtered_df['loan_amount'].mean():,.0f}")
+col5.metric('Average CIBIL Score',round(filtered_df['cibil_score'].mean(),1))
 
 #----------Demographics----------
 col1,col2,col3 = st.columns(3)
