@@ -38,7 +38,7 @@ gender_df = filtered_df['SEX'].value_counts().reset_index(name='count')
 
 bar = px.bar(
     gender_df,
-    x='PREMIUM',
+    x='SEX',
     y='count',
     labels={'index':'Gender','count':'Policies'}
 )
@@ -51,7 +51,7 @@ usage_df = filtered_df['USAGE'].value_counts().reset_index(name='count')
 
 pie = px.pie(
     usage_df,
-    names='index',
+    names='USAGE',
     values='count'
 )
 st.plotly_chart(pie,use_container_width=True)
