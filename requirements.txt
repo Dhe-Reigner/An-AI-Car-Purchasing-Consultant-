@@ -1,9 +1,8 @@
-streamlit
-pandas
-plotly
-streamlit-extras
-langchain
-langchain-experimental
-langchain-groq
-python-dotenv
-crewai
+streamlit==1.35.0
+pandas==2.2.2
+plotly==5.22.0
+
+langchain==0.2.16
+langchain-groq==0.1.6
+
+python-dotenv==1.0.1
