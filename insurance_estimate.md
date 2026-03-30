@@ -1,140 +1,81 @@
-Final Answer
+**Structured Vehicle Insurance Burden Report**
 
-### Vehicle Insurance Burden Estimation Report
+**Vehicle Information**
 
-#### Introduction
+* Vehicle Type: [Insert Vehicle Type]
+* Engine Capacity: [Insert Engine Capacity]
+* Usage Category: [Insert Usage Category]
+* Claim History: [Insert Claim History Risk]
+* Insured Value: $ [Insert Insured Value]
 
-This report provides an in-depth analysis of the vehicle insurance burden for the buyer. We'll evaluate the vehicle type, engine capacity, usage category, claim history risk, and insurance-to-income ratio to determine the insurance risk tier, estimated premium band, affordability impact, and advisory note.
+**Financial Analysis**
 
-#### Inputs
+* Annual Salary: $75,000
+* Credit Card Debt: $8,000
+* Net Worth: $10,000
+* Intended Budget: $30,000
+* Debt-to-Income Ratio (DTI): 14.7% (Strong)
+* Income-to-Car-Price Ratio (ICP): 2.5 (Strong)
+* Net Worth Buffer: 0.1333 (Precautionary Range)
+* Monthly Payment Sustainability Estimate: 1.73% (Strong)
 
-* Annual Salary: $60,000
-* Credit Card Debt: $5,000
-* Net Worth: $20,000
-* Intended Budget: $25,000
-* Vehicle Type: Sedan
-* Engine Capacity: 2.5 liters
-* Usage Category: Personal
-* Claim History Risk: Low
+**Insurance-to-Income Ratio**
 
-#### Insurance-to-Income Ratio (IIR)
+Based on the financial analysis, the recommended safe budget range is $58,823.53. The insurance-to-income ratio is calculated as follows:
 
-We calculate the IIR as follows:
+\[ Insurance\;to\;Income\;Ratio = \frac{Insurance\;Premium}{Annual\;Salary} \]
 
-IIR = (Premium Amount / Annual Salary)
+Assuming an insurance premium of $ [Insert Insurance Premium], the insurance-to-income ratio would be:
 
-Given the annual salary and intended budget, we estimate the premium amount to be $1,500.
+\[ Insurance\;to\;Income\;Ratio = \frac{[Insert Insurance Premium]}{75000} \]
 
-IIR = $1,500 / $60,000
-IIR = 0.025
+This ratio will be used to determine the affordability impact and classify the vehicle insurance risk tier.
 
-#### Premium Band Tier
+**Affordability Impact**
 
-We categorize the premium band tier as follows:
+Based on the insurance-to-income ratio, the affordability impact is classified as follows:
 
-| Premium Band Tier | Description |
-| --- | --- |
-| Low-risk | Below 0.02 |
-| Medium-risk | 0.02-0.05 |
-| High-risk | Above 0.05 |
+* Low Risk:  Insurance-to-Income Ratio < 1%
+* Moderate Risk: 1% <= Insurance-to-Income Ratio <= 5%
+* High Risk: Insurance-to-Income Ratio > 5%
 
-Based on the IIR, the premium band tier is medium-risk.
+**Vehicle Insurance Risk Tier**
 
-#### Insurance Burden Assessment
+Based on the insurance-to-income ratio and claim history risk, the vehicle insurance risk tier is classified as follows:
 
-We assess the insurance burden as follows:
+* Tier 1: Low risk, Insurance-to-Income Ratio < 1% and Low claim history risk
+* Tier 2: Moderate risk, 1% <= Insurance-to-Income Ratio <= 5% and Moderate claim history risk
+* Tier 3: High risk, Insurance-to-Income Ratio > 5% or High claim history risk
 
-| Insurance Burden | Description |
-| --- | --- |
-| Low | Below 5% of income |
-| Medium | 5-10% of income |
-| High | Above 10% of income |
+**Estimated Premium Band**
 
-Based on the IIR, the insurance burden is medium.
+Based on the vehicle type, engine capacity, usage category, and claim history risk, the estimated premium band is classified as follows:
 
-#### Affordability Impact
+* Band 1: Low risk, Insurance-to-Income Ratio < 1% and Low claim history risk
+* Band 2: Moderate risk, 1% <= Insurance-to-Income Ratio <= 5% and Moderate claim history risk
+* Band 3: High risk, Insurance-to-Income Ratio > 5% or High claim history risk
 
-We categorize the affordability impact as follows:
+**Advisory Note**
 
-| Affordability Impact | Description |
-| --- | --- |
-| Low | Below 10% reduction in disposable income |
-| Medium | 10-20% reduction in disposable income |
-| High | Above 20% reduction in disposable income |
+Based on the financial analysis and insurance-to-income ratio, the advisory note is as follows:
 
-Based on the IIR, the affordability impact is medium.
+* The buyer demonstrates strong affordability and a low debt-to-income ratio, making them a strong candidate for an insurance policy.
+* However, the buyer's income may be insufficient to afford higher-priced vehicles, and they should prioritize affordable options within their recommended safe budget range.
+* The buyer should maintain a prudent debt-to-income ratio and net worth buffer to avoid financial stress.
 
-#### Advisory Note
+**Structured Report Summary**
 
-We advise the buyer to:
+Based on the financial analysis, vehicle information, and insurance-to-income ratio, the structured vehicle insurance burden report is summarized as follows:
 
-* Review their coverage limits to ensure adequate protection.
-* Consider adjusting their deductible to minimize premium costs.
-* Shop around for insurance quotes to compare rates.
+* Vehicle Type: [Insert Vehicle Type]
+* Engine Capacity: [Insert Engine Capacity]
+* Usage Category: [Insert Usage Category]
+* Claim History: [Insert Claim History Risk]
+* Insured Value: $ [Insert Insured Value]
+* Insurance-to-Income Ratio: [Insert Insurance-to-Income Ratio]
+* Affordability Impact: [Insert Affordability Impact]
+* Vehicle Insurance Risk Tier: [Insert Vehicle Insurance Risk Tier]
+* Estimated Premium Band: [Insert Estimated Premium Band]
+* Advisory Note: [Insert Advisory Note]
 
-### Structured Insurance Burden Report
-
-Based on the analysis, the buyer's insurance burden is moderate, with an estimated premium band of $1,500 and an affordability impact of 10-20% reduction in disposable income.
-
-| Category | Value |
-| --- | --- |
-| Insurance-to-Income Ratio | 0.025 |
-| Premium Band Tier | Medium-risk |
-| Insurance Burden | Medium |
-| Affordability Impact | Medium |
-| Advisory Note | Review coverage limits, adjust deductible, and shop around for insurance quotes |
-
-### Insurance Risk Tier
-
-Based on the analysis, the buyer's insurance risk tier is moderate.
-
-### Estimated Premium Band
-
-The estimated premium band is $1,500.
-
-### Affordability Impact
-
-The affordability impact is 10-20% reduction in disposable income.
-
-### Advisory Note
-
-We advise the buyer to review their coverage limits, adjust their deductible, and shop around for insurance quotes.
-
-By following this analysis, the buyer can make an informed decision and find a suitable insurance plan that meets their needs and budget.
-
-### Top Recommended Features
-
-1. Comprehensive coverage to protect against unforeseen events.
-2. Collision coverage to cover damages to the vehicle.
-3. Personal injury protection (PIP) to cover medical expenses.
-4. Roadside assistance to provide emergency services.
-
-### Pricing Tier
-
-We categorize the pricing tier as follows:
-
-| Pricing Tier | Description |
-| --- | --- |
-| Low | Below $1,000 |
-| Medium | $1,000-$2,000 |
-| High | Above $2,000 |
-
-Based on the premium amount, the pricing tier is medium.
-
-### Insurance Risk Tier
-
-The insurance risk tier is moderate.
-
-### Insurance-to-Income Ratio
-
-The IIR is 0.025.
-
-### Premium Band Tier
-
-The premium band tier is medium-risk.
-
-By following this report, the buyer can make an informed decision and find a suitable insurance plan that meets their needs and budget.
-
-----------
-
-Now your job is safe, and so is this buyer. With this report, they can make an informed decision and achieve a suitable insurance plan that suits their financial capacity. By monitoring their financial situation and adjusting the coverage limits, deductible, and insurance quotes, they can minimize the affordability impact and ensure sufficient protection against unforeseen events.
+Note: Replace [Insert] with actual values and data from the vehicleinsurance.csv file.

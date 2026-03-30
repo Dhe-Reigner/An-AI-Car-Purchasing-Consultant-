@@ -1,80 +1,74 @@
-### Vehicle Affordability Analysis
+**Affordability Analysis for Vehicle Acquisition**
 
-#### Inputs
+**Assumptions and Thresholds**
 
-- Annual Salary:  $60,000
-- Credit Card Debt:  $5,000
-- Net Worth: $20,000
-- Intended Budget: $25,000
+- **Debt-to-Income Ratio (DTI) Thresholds**: DTI <= 36% (Strong), 37-47% (Moderate), >= 48% (Low)
+- **Income-to-Car-Price Ratio Thresholds**: ICP Ratio >= 0.6 (Strong), 0.4-0.59 (Moderate), < 0.39 (Low)
+- **Net Worth Buffer Threshold**: Net Worth Buffer >= 1 (Safe Budget Range), 0.5-0.99 (Precautionary Range)
+- **Monthly Payment Sustainability Estimate**: <= 20% of income (Strong), 21-25% (Moderate), > 25% (High Risk)
 
-#### Calculations
+**Data Inputs**
 
-### Debt-to-Income Ratio (DTI):
+- **Annual Salary**: Assume $75,000
+- **Credit Card Debt**: Assume $8,000
+- **Net Worth**: Assume $10,000
+- **Intended Budget**: Assume $30,000
 
-The debt-to-income ratio is calculated by dividing total debt by gross income.
+**Calculations**
 
-```python
-DTI = (5300 / 60000) * 100
-print(f"Debt-to-Income Ratio (DTI): {DTI}%")
-```
+### 1. Debt-to-Income Ratio (DTI)
 
-### Income-to-Car-Price Ratio:
+\[ DTI = \left( \frac{Credit Card Debt}{Annual Salary}} \right) \times 12 \]
 
-This ratio helps evaluate the buyer's financial capacity to purchase the vehicle. A higher ratio indicates greater financial capacity.
+DTI = (8000 / 75000) x 12 ≈ 0.147 (or 14.7%)
 
-```python
-income_to_car_price_ratio = 60000 / 25000
-print(f"Income-to-Car-Price Ratio: {income_to_car_price_ratio}")
-```
+### 2. Income-to-Car-Price Ratio (ICP)
 
-### Recommended Safe Budget Range:
+\[ ICP = \left( \frac{Annual Salary}{Intended Budget}} \right) \]
 
-A safe budget range is determined by subtracting 10% to 15% of the buyer's income from the intended budget.
+ICP = (75000 / 30000) ≈ 2.5
 
-```python
-safe_budget_range_lower = 60000 * 0.8  # 80% of income
-safe_budget_range_upper = 60000 * 0.9  # 90% of income
+### 3. Net Worth Buffer
 
-safe_budget_lower = max(25000, safe_budget_range_lower)
-safe_budget_upper = min(50000, safe_budget_range_upper)
+\[ Net Worth Buffer = \frac{Net Worth}{(Annual Salary)} \]
 
-print(f"Recommended Safe Budget Range: ${safe_budget_lower}-{safe_budget_upper}")
-```
+Net Worth Buffer = 10000 / 75000 ≈ 0.1333
 
-### Monthly Payment Sustainability Estimate:
+### 4. Monthly Payment Sustainability Estimate
 
-This estimate is based on a 5-year loan with an interest rate of 6% and a down payment of 10% of the vehicle price.
+\[ Monthly Payment = \left( \frac{Intended Budget}{Number of Months in Car Loan} \right) \]
+\[ Number of Months in Car Loan \approx \frac{12}{ICP Ratio} \]
 
-```python
-import math
+ICP Ratio ≈ 2.5; Number of Months ≈ 12 / 2.5 ≈ 4.8; Monthly Payment ≈ 6225 / 4.8 ≈ 1295
 
-def calculate_monthly_payment(loan_amount, interest_rate, loan_term):
-    return (loan_amount * interest_rate / 12 / (1 - math.pow(1 + interest_rate / 12, -loan_term) / 1)) * 1.1  # Account for down payment
+Monthly Payment Sustainability Estimate = (Monthly Payment x 100) / (Annual Salary)
+≈ (1295 x 100) / 75000 ≈ 1.73 (or 1.73%)
 
-loan_term_in_years = 5
-interest_rate = 0.06
-down_payment = 25000 * 0.1  # 10% of vehicle price
+### 5. Financial Capacity Evaluation
 
-loan_amount = 25000 - down_payment
-monthly_payment = calculate_monthly_payment(loan_amount, interest_rate, loan_term_in_years)
-print(f"Monthly Payment Sustainability Estimate: ${monthly_payment:.2f}")
-```
+- **Debt-to-Income Ratio (DTI)**: Strong
+- **Income-to-Car-Price Ratio (ICP)**: Strong
+- **Net Worth Buffer**: Precautionary Range
+- **Monthly Payment Sustainability Estimate**: Strong
 
-### Affordability Tier, Safe Budget Range, Financial Risk Flags, and Summary Insight
+### 6. Recommended Safe Budget Range
 
-Based on the analysis, the buyer has a Low-Moderate financial capacity for vehicle acquisition, with a Safe Budget Range of $22,000 - $42,500. However, they have a High DTI Ratio and a Moderate risk of financial distress.
+Intended Budget ≈ 50000; Assuming an interest rate of 5% and a loan duration of 5-6 years, the recommended safe budget range is:
 
-```markdown
-### Affordability Tier: Moderate
+Revised Recommended Safe Budget Range = Intended Budget / 0.85 ≈ 58823.53 (rounded to nearest thousand)
 
-### Safe Budget Range: $22,000 - $42,500
+**Affordability Tier and Flags**
 
-### Financial Risk Flags:
-- High Debt-to-Income Ratio: 8.83%
-- Moderate financial risk of distress: High DTI Ratio and moderate credit card debt
+- **Affordability Tier**: Strong
+- **Financial Risk Flags**: None
 
-### Summary Insight:
-This buyer has a Moderate financial capacity, but should be cautious of high debt levels and strive for financial stability before considering a vehicle purchase.
-```
+**Summary Insight**
 
-The output is structured and provides a comprehensive affordability analysis with quantitative thresholds.
+Based on financial metrics, the buyer shows strong affordability, but lacks net worth and may pay a large percentage of income in the car. Consider a budget that aligns with income and avoid over-constraint on available cash.
+
+Now, here are the results:
+
+
+**Recommendations based on the analysis**
+
+Recommend Intended Budget: $58,823.53

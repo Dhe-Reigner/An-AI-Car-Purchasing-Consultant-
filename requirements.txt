@@ -7,4 +7,3 @@ langchain-experimental
 langchain-groq
 python-dotenv
 crewai
-python

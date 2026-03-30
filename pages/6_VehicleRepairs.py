@@ -31,6 +31,7 @@ filtered_df.columns  =(
 )
 
 #-------------Overview KPIs---------
+st.subheader('📊Key Metrics',divider='rainbow')
 col1,col2,col3 = st.columns(3)
 
 
@@ -52,6 +53,7 @@ col16.metric('Repair Succes Rate',
 st.divider()
 
 #-------------Problem Distribution-------------
+st.subheader('Problem Distribution',divider='rainbow')
 col1,col2 = st.columns(2)
 
 with col1:
@@ -81,6 +83,7 @@ with col2:
 st.divider()
 
 #-------------Severity Analysis-----------
+st.subheader('Severity Analysis',divider='rainbow')
 col3,col4 = st.columns(2)
 
 with col3:
@@ -102,6 +105,7 @@ with col4:
 st.divider()
 
 #-----------Diagnosis & Repair-----
+st.subheader('Diagnosis & Repair',divider='rainbow')
 col5,col6 = st.columns(2)
 
 with col5:
@@ -131,6 +135,7 @@ with col6:
 st.divider()
 
 #--------------Heatmap-------------
+st.subheader('Car Problems & Repair Status',divider='rainbow')
 col1, col2 = st.columns(2)
 
 with col1:
@@ -143,8 +148,8 @@ with col1:
     )
     fig = px.bar(
         problem_counts,
-        x='Problem',
-        y='Count',
+        x='problem_classification',
+        y='count',
         title='Frequency of Reported Vehicle Problems'
     )
     st.plotly_chart(fig,use_container_width=True)
@@ -152,7 +157,7 @@ with col1:
 with col2:
     st.subheader('Repair Status Distribution', divider='rainbow')
     status_counts = (
-        filtered_df['REPAIR STATUS']
+        filtered_df['repair_status']
         .value_counts()
         .reset_index()
         .rename(columns={'index':'Status', "REPAIR STATUS":'Count'})
@@ -160,9 +165,9 @@ with col2:
 
     fig2 = px.bar(
         status_counts,
-        x='Status',
-        y='Count',
-        color='Status',
+        x='repair_status',
+        y='count',
+        color='repair_status',
         title='Outcome of Repair Attempts'
     )
     st.plotly_chart(fig2,use_container_width=True)
@@ -173,8 +178,8 @@ with col3:
     st.subheader('Diagnosis vs Repair Cost',divider='rainbow')
     fig3 = px.box(
         filtered_df,
-        x='DIAGNOSIS',
-        y='REPAIR COST',
+        x='diagnosis',
+        y='repair_status',
         title='Repair Cost Distribution by Diagnosis'
     )
     st.plotly_chart(fig3, use_container_width=True)
@@ -182,15 +187,15 @@ with col3:
 with col4:
     st.subheader('Most Common Repair Solutions',divider='rainbow')
     solution_counts = (
-        filtered_df['SOLUTION USED']
+        filtered_df['solution_used']
         .value_counts()
         .reset_index()
         .rename(columns={'index':'Solution', 'SOLUTION USED':'Count'})
     )
     fig4 = px.bar(
         solution_counts,
-        x='Solution',
-        y='Count',
+        x='solution_used',
+        y='count',
         title='Frequently Applied Repair Solutions'
     )
     st.plotly_chart(fig4,use_container_width=True)
@@ -214,7 +219,7 @@ You can ask questions like:
 #---------Langchain Setup----------
 load_dotenv()
 api_key = os.getenv('GROQ_API_KEY')
-llm = ChatGroq('llama-3.1-8b-instant',temperature=0.6,api_key=api_key)
+llm = ChatGroq(model='llama-3.1-8b-instant',temperature=0.6,api_key=api_key)
 
 user_csv = 'dataset/VehicleRepairs.csv'
 

@@ -24,6 +24,7 @@ filtered_df = dataframe_explorer(df,case=True)
 st.dataframe(filtered_df, use_container_width=True)
 
 #-------------Overview KPIs----------
+st.subheader('📊Key Metrics',divider='rainbow')
 col1,col2,col3,col4 = st.columns(4)
 
 col1.metric('Total Policies',len(filtered_df))
@@ -32,6 +33,7 @@ col3.metric('Average Insured Value',f'{filtered_df['INSURED_VALUE'].mean():,.0f}
 col4.metric('Claim Ratio',f'{filtered_df['CLAIM_PAID'].sum()/df['PREMIUM'].sum():.2%}')
 
 #------------Demographic & Policy Analysis------------
+st.subheader('Demographics & Policy Analysis',divider='rainbow')
 st.subheader('Policies by Gender',divider='rainbow')
 
 gender_df = filtered_df['SEX'].value_counts().reset_index(name='count')
