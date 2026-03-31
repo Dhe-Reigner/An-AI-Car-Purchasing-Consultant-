@@ -1,13 +1,12 @@
 import streamlit as st
 #from crew import Car
-from car.src.car.crew import Car
+#from car.src.car.crew import Car
+from car.src.car.utils import run_ai
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-#os.getenv('HUGGINGFACE_API_KEY')
-os.getenv('GROQ_API_KEY')
 
 def main():
     st.set_page_config(page_title='AI Car Purchase Recommendation Engine',page_icon="🚗")
@@ -99,9 +98,11 @@ Welcome to your intelligent car buying assistant.
 
             with st.spinner('Analyzing financial profile, market trends,insurance risk and repair history...'):
                 try:
-                    my_crew_instance = Car()
-                    crew_instance = my_crew_instance.crew()
-                    crew_result = crew_instance.kickoff(inputs={'inputs':inputs})
+                    # my_crew_instance = Car()
+                    # crew_instance = my_crew_instance.crew()
+                    # crew_result = crew_instance.kickoff(inputs={'inputs':inputs})
+
+                    crew_result = run_ai(inputs)
 
                     st.subheader('🚘 Your Personalized Car Recommendations')
                     st.markdown(crew_result)
