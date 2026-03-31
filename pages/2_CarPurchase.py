@@ -327,7 +327,7 @@ a1,a2,a3,a4 = st.columns(4)
 
 a1.metric('Total Buyers',len(filtered_df))
 a2.metric('Average Car Purchase($)',f"{df['Car Purchase Amount'].mean():,.0f}")
-a3.metric('Average Annual Salary ($)',f'{df['Annual Salary'].mean():,.0f}')
+a3.metric('Average Annual Salary ($)',f"{df['Annual Salary'].mean():,.0f}")
 a4.metric('Average Net Worth ($)',f"{df['Net Worth'].mean():,.0f}")
 
 #st.divider()

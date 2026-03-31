@@ -32,8 +32,8 @@ filtered_df['Total']=(
 st.subheader('📊Key Metrics',divider='rainbow')
 kpi1,kpi2,kpi3,kpi4,kpi5 = st.columns(5)
 kpi1.metric('Total Buyers',len(filtered_df))
-kpi5.metric('Total Buyers Selected',f'{int(filtered_df['Total'].sum()):,}')
-kpi2.metric('Average Price',f'${df['Price'].mean():,.0f}')
+kpi5.metric('Total Buyers Selected',f"{int(filtered_df['Total'].sum()):,}")
+kpi2.metric('Average Price',f"${df['Price'].mean():,.0f}")
 kpi3.metric('Top Manufacturer',df.groupby('Manufacturer')['Total'].sum().idxmax())
 kpi4.metric('Top Fuel Type',df.groupby('Fuel')['Total'].sum().idxmax())
 

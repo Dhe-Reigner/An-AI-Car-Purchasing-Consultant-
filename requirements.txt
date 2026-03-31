@@ -6,3 +6,7 @@ langchain==0.2.16
 langchain-groq==0.1.6
 
 python-dotenv==1.0.1
+
+streamlit-extras==0.4.0
+
+matplotlib==3.8.4

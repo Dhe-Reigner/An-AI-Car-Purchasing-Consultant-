@@ -28,9 +28,9 @@ st.subheader('📊Key Metrics',divider='rainbow')
 col1,col2,col3,col4 = st.columns(4)
 
 col1.metric('Total Policies',len(filtered_df))
-col2.metric('Total Premium', f'{filtered_df['PREMIUM'].sum():,.0f}')
-col3.metric('Average Insured Value',f'{filtered_df['INSURED_VALUE'].mean():,.0f}')
-col4.metric('Claim Ratio',f'{filtered_df['CLAIM_PAID'].sum()/df['PREMIUM'].sum():.2%}')
+col2.metric('Total Premium', f"{filtered_df['PREMIUM'].sum():,.0f}")
+col3.metric('Average Insured Value',f"{filtered_df['INSURED_VALUE'].mean():,.0f}")
+col4.metric('Claim Ratio',f"{filtered_df['CLAIM_PAID'].sum()/df['PREMIUM'].sum():.2%}")
 
 #------------Demographic & Policy Analysis------------
 st.subheader('Demographics & Policy Analysis',divider='rainbow')
