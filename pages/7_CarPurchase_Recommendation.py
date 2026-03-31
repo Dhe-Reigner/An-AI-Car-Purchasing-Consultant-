@@ -1,8 +1,11 @@
 import streamlit as st
+import sys
+import os
 #from crew import Car
 #from car.src.car.crew import Car
 from car.src.car.utils import run_ai
 from dotenv import load_dotenv
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import os
 
 load_dotenv()
