@@ -6,6 +6,10 @@ def load_yaml(path):
     with open(path, "r") as f:
         return yaml.safe_load(f)
 
+# Absolute path to agents.yaml
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # points to car/src/car/
+agents_path = os.path.join(BASE_DIR, "config", "agents.yaml")
+
 def build_prompt(agent, task, user_input):
     return f"""
 You are a {agent['role']}.
@@ -27,8 +31,10 @@ Respond with:
 """
 
 def run_ai(user_input):
-    agent = load_yaml("config/agents.yaml")["car_expert"]
-    task = load_yaml("config/tasks.yaml")["recommend_car"]
+    agent = load_yaml(agents_path)["final_recommendation_agent"]
+    task = {
+        "description": "Analyze user input and recommend the best car options."
+    }
 
     # llm = ChatGroq(
     #     api_key="YOUR_GROQ_API_KEY",
