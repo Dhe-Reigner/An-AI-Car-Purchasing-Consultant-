@@ -4,9 +4,15 @@ plotly==5.22.0
 
 langchain==0.2.16
 langchain-groq==0.1.6
+langchain-experimental==0.0.62
 
 python-dotenv==1.0.1
 
 streamlit-extras==0.4.0
+seaborn==0.13.2
 
 matplotlib==3.8.4
+
+crewai==0.11.2
+
+
